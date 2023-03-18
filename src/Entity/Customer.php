@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\CustomerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\UuidV8 as Uuid;
+use Symfony\Component\Uid\UuidV7 as Uuid;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
 class Customer
