@@ -1,6 +1,6 @@
 <h2>Ajouter une catégorie</h2>
 {{ form_start(categoryForm) }}
-    {{ form_row(categoryForm.name) }}
+    {{ form_widget(categoryForm) }}
 <input type="submit" />
 {{ form_end(categoryForm) }}
 <h2>Ajouter un nouveau plat</h2>
@@ -11,3 +11,10 @@
     {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
 <input type="submit" />
 {{ form_end(dishForm) }}
+<h2>Modifier l'organisation du restaurant</h2>
+{{ form_start(restaurantForm) }}
+    {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
+    {{ form_row(restaurantForm.openingHour, { 'label' : 'Horaire d\'ouverture' }) }}
+    {{ form_row(restaurantForm.closingHour, { 'label' : 'Horaire de fermeture' }) }}
+<input type="submit" />
+{{ form_end(restaurantForm) }}
