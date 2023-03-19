@@ -1,0 +1,13 @@
+<h2>Ajouter une catégorie</h2>
+{{ form_start(categoryForm) }}
+    {{ form_row(categoryForm.name) }}
+<input type="submit" />
+{{ form_end(categoryForm) }}
+<h2>Ajouter un nouveau plat</h2>
+{{ form_start(dishForm) }}
+    {{ form_row(dishForm.name, { 'label' : 'Nom' }) }}
+    {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
+    {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
+    {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
+<input type="submit" />
+{{ form_end(dishForm) }}
