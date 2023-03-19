@@ -17,10 +17,16 @@ class UpdateRestaurantType extends AbstractType
             ->add('maxGuests', NumberType::class, [
                 'scale' => 0
             ])
-            ->add('openingHour', TimeType::class, [
+            ->add('noonOpeningHour', TimeType::class, [
                 'input' => 'datetime'
             ])
-            ->add('closingHour',TimeType::class, [
+            ->add('noonClosingHour',TimeType::class, [
+                'input' => 'datetime'
+            ])
+            ->add('eveningOpeningHour', TimeType::class, [
+                'input' => 'datetime'
+            ])
+            ->add('eveningClosingHour',TimeType::class, [
                 'input' => 'datetime'
             ])
         ;

@@ -20,7 +20,7 @@ class Booking
     private ?\DateTimeInterface $bookingDate = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $bookingTime = null;
+    private ?\DateTimeInterface $noonBookingTime = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
     private array $allergies = [];
@@ -31,6 +31,9 @@ class Booking
 
     #[ORM\Column]
     private ?int $guestNumber = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $eveningBookingTime = null;
 
     public function getId(): ?Uuid
     {
@@ -49,14 +52,14 @@ class Booking
         return $this;
     }
 
-    public function getBookingTime(): ?\DateTimeInterface
+    public function getNoonBookingTime(): ?\DateTimeInterface
     {
-        return $this->bookingTime;
+        return $this->noonBookingTime;
     }
 
-    public function setBookingTime(\DateTimeInterface $bookingTime): self
+    public function setNoonBookingTime(\DateTimeInterface $noonBookingTime): self
     {
-        $this->bookingTime = $bookingTime;
+        $this->noonBookingTime = $noonBookingTime;
 
         return $this;
     }
@@ -93,6 +96,18 @@ class Booking
     public function setGuestNumber(int $guestNumber): self
     {
         $this->guestNumber = $guestNumber;
+
+        return $this;
+    }
+
+    public function getEveningBookingTime(): ?\DateTimeInterface
+    {
+        return $this->eveningBookingTime;
+    }
+
+    public function setEveningBookingTime(\DateTimeInterface $eveningBookingTime): self
+    {
+        $this->eveningBookingTime = $eveningBookingTime;
 
         return $this;
     }

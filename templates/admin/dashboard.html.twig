@@ -14,7 +14,11 @@
 <h2>Modifier l'organisation du restaurant</h2>
 {{ form_start(restaurantForm) }}
     {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
-    {{ form_row(restaurantForm.openingHour, { 'label' : 'Horaire d\'ouverture' }) }}
-    {{ form_row(restaurantForm.closingHour, { 'label' : 'Horaire de fermeture' }) }}
+    <h3>Service du midi</h3>
+    {{ form_row(restaurantForm.noonOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
+    {{ form_row(restaurantForm.noonClosingHour, { 'label' : 'Horaire de fermeture' }) }}
+    <h3>Service du soir</h3>
+    {{ form_row(restaurantForm.eveningOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
+    {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
 <input type="submit" />
 {{ form_end(restaurantForm) }}

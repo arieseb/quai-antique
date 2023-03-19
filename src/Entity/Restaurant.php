@@ -26,13 +26,19 @@ class Restaurant
     private array $businessDays = [];
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $openingHour = null;
+    private ?\DateTimeInterface $noonOpeningHour = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $closingHour = null;
+    private ?\DateTimeInterface $noonClosingHour = null;
 
     #[ORM\Column]
     private ?int $currentGuests = 0;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $eveningOpeningHour = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $eveningClosingHour = null;
 
     public function getId(): ?Uuid
     {
@@ -75,26 +81,26 @@ class Restaurant
         return $this;
     }
 
-    public function getOpeningHour(): ?\DateTimeInterface
+    public function getNoonOpeningHour(): ?\DateTimeInterface
     {
-        return $this->openingHour;
+        return $this->noonOpeningHour;
     }
 
-    public function setOpeningHour(\DateTimeInterface $openingHour): self
+    public function setNoonOpeningHour(\DateTimeInterface $noonOpeningHour): self
     {
-        $this->openingHour = $openingHour;
+        $this->noonOpeningHour = $noonOpeningHour;
 
         return $this;
     }
 
-    public function getClosingHour(): ?\DateTimeInterface
+    public function getNoonClosingHour(): ?\DateTimeInterface
     {
-        return $this->closingHour;
+        return $this->noonClosingHour;
     }
 
-    public function setClosingHour(\DateTimeInterface $closingHour): self
+    public function setNoonClosingHour(\DateTimeInterface $noonClosingHour): self
     {
-        $this->closingHour = $closingHour;
+        $this->noonClosingHour = $noonClosingHour;
 
         return $this;
     }
@@ -107,6 +113,30 @@ class Restaurant
     public function setCurrentGuests(int $currentGuests): self
     {
         $this->currentGuests = $currentGuests;
+
+        return $this;
+    }
+
+    public function getEveningOpeningHour(): ?\DateTimeInterface
+    {
+        return $this->eveningOpeningHour;
+    }
+
+    public function setEveningOpeningHour(\DateTimeInterface $eveningOpeningHour): self
+    {
+        $this->eveningOpeningHour = $eveningOpeningHour;
+
+        return $this;
+    }
+
+    public function getEveningClosingHour(): ?\DateTimeInterface
+    {
+        return $this->eveningClosingHour;
+    }
+
+    public function setEveningClosingHour(\DateTimeInterface $eveningClosingHour): self
+    {
+        $this->eveningClosingHour = $eveningClosingHour;
 
         return $this;
     }

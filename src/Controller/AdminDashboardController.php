@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Dish;
-use App\Entity\Restaurant;
 use App\Form\AddCategoryType;
 use App\Form\AddDishType;
 use App\Form\UpdateRestaurantType;
@@ -45,6 +44,7 @@ class AdminDashboardController extends AbstractController
         $restaurant = $restaurantRepository->findOneBy(['name' => 'Le Quai Antique']);
         $restaurantForm = $this->createForm(UpdateRestaurantType::class, $restaurant);
         $restaurantForm->handleRequest($request);
+
         if ($restaurantForm->isSubmitted() && $restaurantForm->isValid()) {
             $restaurantRepository->save($restaurant, true);
             return $this->redirect('/admin');
