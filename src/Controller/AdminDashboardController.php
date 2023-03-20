@@ -50,7 +50,6 @@ class AdminDashboardController extends AbstractController
             return $this->redirect('/admin');
         }
 
-
         return $this->render('admin/dashboard.html.twig', [
             'categoryForm' => $categoryForm->createView(),
             'dishForm' => $dishForm->createView(),

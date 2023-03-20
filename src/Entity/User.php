@@ -32,13 +32,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $firstName = null;
 
+    #[ORM\Column]
+    private ?string $lastName = null;
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
     }
-
-    #[ORM\Column]
-    private ?string $lastName = null;
 
     public function setFirstName(?string $firstName): void
     {

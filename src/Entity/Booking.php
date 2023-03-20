@@ -19,7 +19,7 @@ class Booking
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $bookingDate = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $noonBookingTime = null;
 
     #[ORM\Column(type: Types::ARRAY, nullable: true)]
@@ -27,12 +27,12 @@ class Booking
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Customer $customer = null;
+    private ?User $user = null;
 
     #[ORM\Column]
     private ?int $guestNumber = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $eveningBookingTime = null;
 
     public function getId(): ?Uuid
@@ -76,14 +76,14 @@ class Booking
         return $this;
     }
 
-    public function getCustomer(): ?Customer
+    public function getUser(): ?User
     {
-        return $this->customer;
+        return $this->user;
     }
 
-    public function setCustomer(?Customer $customer): self
+    public function setUser(?User $user): self
     {
-        $this->customer = $customer;
+        $this->user = $user;
 
         return $this;
     }
