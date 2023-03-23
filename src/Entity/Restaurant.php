@@ -31,8 +31,8 @@ class Restaurant
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $noonClosingHour = null;
 
-    #[ORM\Column]
-    private ?int $currentGuests = 0;
+//    #[ORM\Column]
+//    private ?int $currentGuests = 0;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $eveningOpeningHour = null;
@@ -105,17 +105,17 @@ class Restaurant
         return $this;
     }
 
-    public function getCurrentGuests(): ?int
-    {
-        return $this->currentGuests;
-    }
-
-    public function setCurrentGuests(int $currentGuests): self
-    {
-        $this->currentGuests = $currentGuests;
-
-        return $this;
-    }
+//    public function getCurrentGuests(): ?int
+//    {
+//        return $this->currentGuests;
+//    }
+//
+//    public function setCurrentGuests(int $currentGuests): self
+//    {
+//        $this->currentGuests = $currentGuests;
+//
+//        return $this;
+//    }
 
     public function getEveningOpeningHour(): ?\DateTimeInterface
     {

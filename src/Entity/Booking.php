@@ -17,13 +17,10 @@ class Booking
     private ?Uuid $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $bookingDate = null;
+    private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $noonBookingTime = null;
-
-    #[ORM\Column(type: Types::ARRAY, nullable: true)]
-    private array $allergies = [];
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
@@ -35,19 +32,26 @@ class Booking
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $eveningBookingTime = null;
 
+    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?BookingDate $bookingDate = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $allergies = null;
+
     public function getId(): ?Uuid
     {
         return $this->id;
     }
 
-    public function getBookingDate(): ?\DateTimeInterface
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->bookingDate;
+        return $this->date;
     }
 
-    public function setBookingDate(\DateTimeInterface $bookingDate): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->bookingDate = $bookingDate;
+        $this->date = $date;
 
         return $this;
     }
@@ -60,18 +64,6 @@ class Booking
     public function setNoonBookingTime(\DateTimeInterface $noonBookingTime): self
     {
         $this->noonBookingTime = $noonBookingTime;
-
-        return $this;
-    }
-
-    public function getAllergies(): array
-    {
-        return $this->allergies;
-    }
-
-    public function setAllergies(?array $allergies): self
-    {
-        $this->allergies = $allergies;
 
         return $this;
     }
@@ -108,6 +100,30 @@ class Booking
     public function setEveningBookingTime(\DateTimeInterface $eveningBookingTime): self
     {
         $this->eveningBookingTime = $eveningBookingTime;
+
+        return $this;
+    }
+
+    public function getBookingDate(): ?BookingDate
+    {
+        return $this->bookingDate;
+    }
+
+    public function setBookingDate(?BookingDate $bookingDate): self
+    {
+        $this->bookingDate = $bookingDate;
+
+        return $this;
+    }
+
+    public function getAllergies(): ?string
+    {
+        return $this->allergies;
+    }
+
+    public function setAllergies(?string $allergies): self
+    {
+        $this->allergies = $allergies;
 
         return $this;
     }

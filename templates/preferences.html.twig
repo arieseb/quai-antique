@@ -1,0 +1,6 @@
+<h2>Préférences</h2>
+{{ form_start(form) }}
+    {{ form_row(form.defaultGuests, {'label' : 'Nombre de convives par défaut'}) }}
+    {{ form_row(form.allergies, {'label' : 'Allergies'}) }}
+<input type="submit" />
+{{ form_end(form) }}
