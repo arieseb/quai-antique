@@ -1,24 +1,28 @@
-<h2>Notre carte</h2>
-{% for category in categories %}
-    <h3>{{ category.name }}</h3>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Nom du plat</th>
-                <th scope="col">Description</th>
-                <th scope="col">Prix</th>
-            </tr>
-        </thead>
-        {% for dish in dishes %}
-            {% if category.id == dish.category.id %}
-                <tbody>
-                    <tr>
-                        <td>{{ dish.name }}</td>
-                        <td>{{ dish.description }}</td>
-                        <td>{{ dish.price }}</td>
-                    </tr>
-                </tbody>
-            {% endif %}
-        {% endfor %}
-    </table>
-{% endfor %}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Notre carte</h2>
+    {% for category in categories %}
+        <h3>{{ category.name }}</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nom du plat</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Prix</th>
+                </tr>
+            </thead>
+            {% for dish in dishes %}
+                {% if category.id == dish.category.id %}
+                    <tbody>
+                        <tr>
+                            <td>{{ dish.name }}</td>
+                            <td>{{ dish.description }}</td>
+                            <td>{{ dish.price }}</td>
+                        </tr>
+                    </tbody>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endfor %}
+{% endblock %}

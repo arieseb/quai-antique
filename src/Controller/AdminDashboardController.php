@@ -4,8 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Dish;
+use App\Entity\Formula;
+use App\Entity\Menu;
 use App\Form\AddCategoryType;
 use App\Form\AddDishType;
+use App\Form\FormulaType;
+use App\Form\MenuType;
 use App\Form\UpdateRestaurantType;
 use App\Repository\RestaurantRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,10 +54,32 @@ class AdminDashboardController extends AbstractController
             return $this->redirect('/admin');
         }
 
+        $menu = new Menu();
+        $menuForm = $this->createForm(MenuType::class, $menu);
+        $menuForm->handleRequest($request);
+
+        if ($menuForm->isSubmitted() && $menuForm->isValid()) {
+            $entityManager->persist($menu);
+            $entityManager->flush();
+            return $this->redirect('/admin');
+        }
+
+        $formula = new Formula();
+        $formulaForm = $this->createForm(FormulaType::class, $formula);
+        $formulaForm->handleRequest($request);
+
+        if ($formulaForm->isSubmitted() && $formulaForm->isValid()) {
+            $entityManager->persist($formula);
+            $entityManager->flush();
+            return $this->redirect('/admin');
+        }
+
         return $this->render('admin/dashboard.html.twig', [
             'categoryForm' => $categoryForm->createView(),
             'dishForm' => $dishForm->createView(),
             'restaurantForm' => $restaurantForm->createView(),
+            'menuForm' => $menuForm->createView(),
+            'formulaForm' => $formulaForm->createView(),
         ]);
     }
 }

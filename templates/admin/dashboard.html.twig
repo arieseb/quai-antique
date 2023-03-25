@@ -1,24 +1,42 @@
-<h2>Ajouter une catégorie</h2>
-{{ form_start(categoryForm) }}
-    {{ form_widget(categoryForm) }}
-<input type="submit" />
-{{ form_end(categoryForm) }}
-<h2>Ajouter un nouveau plat</h2>
-{{ form_start(dishForm) }}
-    {{ form_row(dishForm.name, { 'label' : 'Nom' }) }}
-    {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
-    {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
-    {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
-<input type="submit" />
-{{ form_end(dishForm) }}
-<h2>Modifier l'organisation du restaurant</h2>
-{{ form_start(restaurantForm) }}
-    {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Modifier l'organisation du restaurant</h2>
+    {{ form_start(restaurantForm) }}
+        {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
     <h3>Service du midi</h3>
     {{ form_row(restaurantForm.noonOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
-    {{ form_row(restaurantForm.noonClosingHour, { 'label' : 'Horaire de fermeture' }) }}
+        {{ form_row(restaurantForm.noonClosingHour, { 'label' : 'Horaire de fermeture' }) }}
     <h3>Service du soir</h3>
     {{ form_row(restaurantForm.eveningOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
-    {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
-<input type="submit" />
-{{ form_end(restaurantForm) }}
+        {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
+        <input type="submit" />
+    {{ form_end(restaurantForm) }}
+    <h2>Ajouter une catégorie</h2>
+    {{ form_start(categoryForm) }}
+        {{ form_widget(categoryForm) }}
+        <input type="submit" class="btn btn-primary" />
+    {{ form_end(categoryForm) }}
+    <h2>Ajouter un nouveau plat</h2>
+    {{ form_start(dishForm) }}
+        {{ form_row(dishForm.name, { 'label' : 'Nom' }) }}
+        {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
+        {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
+        {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
+        <input type="submit" />
+    {{ form_end(dishForm) }}
+    <h2>Ajouter un menu</h2>
+    {{ form_start(menuForm) }}
+        {{ form_row(menuForm.name, { 'label' : 'Nom' }) }}
+        <input type="submit" />
+    {{ form_end(menuForm) }}
+    <h2>Ajouter une formule</h2>
+    {{ form_start(formulaForm) }}
+        {{ form_row(formulaForm.name, { 'label' : 'Nom' }) }}
+        {{ form_row(formulaForm.period, { 'label' : 'Période pendant laquelle la formule est disponible' }) }}
+        {{ form_row(formulaForm.description, { 'label' : 'Description' }) }}
+        {{ form_row(formulaForm.price, { 'label' : 'Tarif' }) }}
+        {{ form_row(formulaForm.menu, { 'label' : 'Menu auquel appartient la formule' }) }}
+        <input type="submit" />
+    {{ form_end(formulaForm) }}
+{% endblock %}

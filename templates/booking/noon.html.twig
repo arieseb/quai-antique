@@ -1,9 +1,13 @@
-<h2>Réserver une table - Service du midi</h2>
-<p>Il est possible de réserver pour encore  {{ roomAvailable }} couverts</p>
-{{ form_start(form) }}
-    {{ form_row(form.date, { 'label' : 'Date de la réservation' }) }}
-    {{ form_row(form.noonBookingTime, { 'label' : 'Heure de la réservation' }) }}
-    {{ form_row(form.guestNumber, { 'label' : 'Nombre de couverts' }) }}
-    {{ form_row(form.allergies, {'label' : 'Allergies'}) }}
-<input type="submit" />
-{{ form_end(form) }}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2>Réserver une table - Service du midi</h2>
+    <p>Il est possible de réserver pour encore  {{ roomAvailable }} couverts</p>
+    {{ form_start(form) }}
+        {{ form_row(form.date, { 'label' : 'Date de la réservation' }) }}
+        {{ form_row(form.noonBookingTime, { 'label' : 'Heure de la réservation' }) }}
+        {{ form_row(form.guestNumber, { 'label' : 'Nombre de couverts' }) }}
+        {{ form_row(form.allergies, {'label' : 'Allergies'}) }}
+    <input type="submit" />
+    {{ form_end(form) }}
+{% endblock %}
