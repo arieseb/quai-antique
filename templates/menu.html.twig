@@ -25,4 +25,18 @@
             {% endfor %}
         </table>
     {% endfor %}
+    <h2>Nos formules</h2>
+    {% for menu in menus %}
+        <h3>{{ menu.name }}</h3>
+            {% for formula in formulas %}
+                {% if menu.id == formula.menu.id %}
+                    <ul class="list-unstyled">
+                        <li>{{ formula.name }}</li>
+                        <li>{{ formula.period }}</li>
+                        <li>{{ formula.description }}</li>
+                        <li>{{ formula.price }}</li>
+                    </ul>
+                {% endif %}
+            {% endfor %}
+    {% endfor %}
 {% endblock %}

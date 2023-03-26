@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h3>Service du midi</h3>
+    {% set noon_booking_link = path('app_booking_noon') %}
+    <a class="btn btn-primary" href="{{ noon_booking_link }}">Réserver une table</a>
+    <h3>Service du soir</h3>
+    {% set evening_booking_link = path('app_booking_evening') %}
+    <a class="btn btn-primary" href="{{ evening_booking_link }}">Réserver une table</a>
+{% endblock %}
