@@ -47,7 +47,6 @@ yarn-error.log
 /bin/*
 !bin/console
 !bin/symfony_requirements
-/vendor/
 
 # Assets and user uploads
 /web/bundles/
@@ -70,5 +69,5 @@ yarn-error.log
 /.web-server-pid
 
 # SSH files
-*.ssh
-*.ssh.pub
+/*.ssh
+/*.ssh.pub
