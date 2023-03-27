@@ -51,13 +51,13 @@ class EveningBookingType extends AbstractType
         }
     }
 
-    public function defaultAllergies(): string
+    public function defaultAllergies(): ?string
     {
         if($this->token->getToken()->getUser() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);
             return $user->getAllergies();
         } else {
-            return '';
+            return null;
         }
     }
 

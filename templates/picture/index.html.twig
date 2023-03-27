@@ -1,16 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Picture index{% endblock %}
+{% block title %}Liste des images{% endblock %}
 
 {% block body %}
-    <h1>Picture index</h1>
+    <h1>Liste des images</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
+                <th>Titre</th>
+                <th>Aperçu</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -18,18 +19,19 @@
             <tr>
                 <td>{{ picture.id }}</td>
                 <td>{{ picture.title }}</td>
+                <td><img src="{{ asset('uploads/' ~ picture.path) }}" alt="{{ picture.title }}" title="{{ picture.title }}" class="img-thumbnail" /></td>
                 <td>
-                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">show</a>
-                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">edit</a>
+                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">Voir</a>
+                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune image trouvée</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_picture_new') }}">Create new</a>
+    <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle image</a>
 {% endblock %}

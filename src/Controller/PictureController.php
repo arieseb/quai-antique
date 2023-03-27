@@ -6,6 +6,7 @@ use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,6 +30,10 @@ class PictureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('images')->getData();
+            $file = uniqid().'.'.$image->guessExtension();
+            $image->move($this->getParameter('images_directory'), $file);
+            $picture->setPath($file);
             $pictureRepository->save($picture, true);
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
@@ -55,6 +60,10 @@ class PictureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('images')->getData();
+            $file = uniqid().'.'.$image->guessExtension();
+            $image->move($this->getParameter('images_directory'), $file);
+            $picture->setPath($file);
             $pictureRepository->save($picture, true);
 
             return $this->redirectToRoute('app_picture_index', [], Response::HTTP_SEE_OTHER);
@@ -70,6 +79,8 @@ class PictureController extends AbstractController
     public function delete(Request $request, Picture $picture, PictureRepository $pictureRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
+            $filePath = $picture->getPath();
+            unlink($this->getParameter('images_directory').'/'.$filePath);
             $pictureRepository->remove($picture, true);
         }
 

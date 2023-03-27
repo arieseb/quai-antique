@@ -10,7 +10,7 @@
     <h3>Service du soir</h3>
     {{ form_row(restaurantForm.eveningOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
         {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
-        <input type="submit" />
+        <input type="submit" class="btn btn-primary" />
     {{ form_end(restaurantForm) }}
     <h2>Ajouter une catégorie</h2>
     {{ form_start(categoryForm) }}
@@ -23,12 +23,12 @@
         {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
         {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
         {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
-        <input type="submit" />
+        <input type="submit" class="btn btn-primary" />
     {{ form_end(dishForm) }}
     <h2>Ajouter un menu</h2>
     {{ form_start(menuForm) }}
         {{ form_row(menuForm.name, { 'label' : 'Nom' }) }}
-        <input type="submit" />
+        <input type="submit" class="btn btn-primary" />
     {{ form_end(menuForm) }}
     <h2>Ajouter une formule</h2>
     {{ form_start(formulaForm) }}
@@ -37,6 +37,9 @@
         {{ form_row(formulaForm.description, { 'label' : 'Description' }) }}
         {{ form_row(formulaForm.price, { 'label' : 'Tarif' }) }}
         {{ form_row(formulaForm.menu, { 'label' : 'Menu auquel appartient la formule' }) }}
-        <input type="submit" />
+        <input type="submit" class="btn btn-primary" />
     {{ form_end(formulaForm) }}
+    <h2>Gestion des images du carroussel</h2>
+    {% set manage_picture_link = path('app_picture_index') %}
+    <a class="btn btn-primary" href="{{ manage_picture_link }}">Gestion des images</a>
 {% endblock %}

@@ -50,3 +50,4 @@ when@test:
                 memory_cost: 10 # Lowest possible value for argon
         access_control:
             - { path: ^/admin, roles: ROLE_ADMIN }
+            - { path: ^/picture, roles: ROLE_ADMIN }
