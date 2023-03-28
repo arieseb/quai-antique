@@ -1,7 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Madurai&family=Lora&family=Montserrat&display=swap');
+
+body {
+    background-color: #B6AC97;
+    color: #392C1E;
+    font-family: 'Lora', serif;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    font-family: 'Hind Madurai', sans-serif;
+}
+
 .custom-carousel-item {
     width: 500px;
 }
 
 .carousel-wrapper {
     width: 500px;
+}
+
+.navbar{
+    background-color: white;
+    border-bottom: #906427 solid 2px;
+    font-size: 1.4rem;
 }
