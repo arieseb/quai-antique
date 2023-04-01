@@ -3,10 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Booking;
-use App\Entity\User;
 use App\Repository\RestaurantRepository;
 use App\Repository\UserRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -43,7 +41,7 @@ class EveningBookingType extends AbstractType
 
     public function defaultGuests(): int
     {
-        if ($this->token->getToken()->getUser() !== null) {
+        if ($this->token->getToken() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);
             return $user->getDefaultGuests();
         } else {
@@ -53,7 +51,7 @@ class EveningBookingType extends AbstractType
 
     public function defaultAllergies(): ?string
     {
-        if($this->token->getToken()->getUser() !== null) {
+        if($this->token->getToken() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);
             return $user->getAllergies();
         } else {
@@ -81,11 +79,6 @@ class EveningBookingType extends AbstractType
             ->add('guestNumber', NumberType::class, [
                 'scale' => 0,
                 'data' => $this->defaultGuests(),
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-                'empty_data' => $this->token->getToken()->getUser()
             ])
         ;
     }

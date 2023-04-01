@@ -23,7 +23,7 @@ class Booking
     private ?\DateTimeInterface $noonBookingTime = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
 
     #[ORM\Column]

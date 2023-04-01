@@ -6,7 +6,8 @@
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="assets/css/style.css">
+            <!--<link rel="stylesheet" href="assets/css/style.css">-->
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {% endblock %}
     </head>
     <body>
@@ -31,7 +32,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navCollapse">
                     <ul class="navbar-nav">
-                        <li class="navbar-item">
+                        <li class="nav-item">
                             <a
                                 href="{{ index_link }}"
                                 {% if route_name == "app_index" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
@@ -40,7 +41,7 @@
                                 Accueil
                             </a>
                         </li>
-                        <li class="navbar-item">
+                        <li class="nav-item">
                             {% set menu_link = path('app_menu') %}
                             <a
                                 href="{{ menu_link }}"
@@ -49,8 +50,28 @@
                                 Carte
                             </a>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a
+                                {% if route_name == "app_booking_noon" or route_name == "app_booking_evening"%}
+                                    class="nav-link dropdown-toggle active"
+                                {% else %}
+                                    class="nav-link dropdown-toggle"
+                                {% endif %}
+                                href="#"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                            >
+                                Réserver
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% set noon_link = path('app_booking_noon') %}
+                                <li><a class="dropdown-item" href="{{ noon_link }}">Service du midi</a></li>
+                                {% set evening_link = path('app_booking_evening') %}
+                                <li><a class="dropdown-item" href="{{ evening_link }}">Service du soir</a></li>
+                            </ul>
+                        </li>
                         {% if app.user == null %}
-                            <li class="navbar-item">
+                            <li class="nav-item">
                                 {% set login_link = path('app_login') %}
                                 <a
                                     href="{{ login_link }}"
@@ -59,7 +80,7 @@
                                     Se connecter
                                 </a>
                             </li>
-                            <li class="navbar-item">
+                            <li class="nav-item">
                                 {% set register_link = path('app_register') %}
                                 <a
                                     href="{{ register_link }}"
@@ -70,7 +91,7 @@
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_USER') %}
-                            <li class="navbar-item">
+                            <li class="nav-item">
                                 {% set preferences_link = path('app_preferences') %}
                                 <a
                                     href="{{ preferences_link }}"
@@ -81,13 +102,24 @@
                             </li>
                         {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li class="navbar-item">
+                            <li class="nav-item">
                                 {% set admin_link = path('app_dashboard') %}
                                 <a
                                     href="{{ admin_link }}"
                                     {% if route_name == "app_dashboard" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
                                 >
                                     Administration
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_USER') %}
+                            <li class="nav-item">
+                                {% set logout_link = path('app_logout') %}
+                                <a
+                                        href="{{ logout_link }}"
+                                        {% if route_name == "app_logour" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                >
+                                    Déconnexion
                                 </a>
                             </li>
                         {% endif %}
@@ -99,7 +131,7 @@
         {% block body %}{% endblock %}
         {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
     </body>
-    <footer>
+    <footer class="d-flex flex-column align-items-center">
         {% block footer %}{{ render(controller('App\\Controller\\FooterController::footer')) }}{% endblock %}
     </footer>
 </html>

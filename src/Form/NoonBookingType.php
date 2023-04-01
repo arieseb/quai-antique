@@ -13,8 +13,6 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -45,7 +43,7 @@ class NoonBookingType extends AbstractType
 
     public function defaultGuests(): int
     {
-        if ($this->token->getToken()->getUser() !== null) {
+        if ($this->token->getToken() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);
             return $user->getDefaultGuests();
         } else {
@@ -55,7 +53,7 @@ class NoonBookingType extends AbstractType
 
     public function defaultAllergies(): ?string
     {
-        if($this->token->getToken()->getUser() !== null) {
+        if($this->token->getToken() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);
             return $user->getAllergies();
         } else {
@@ -83,11 +81,6 @@ class NoonBookingType extends AbstractType
             ->add('guestNumber', NumberType::class, [
                 'scale' => 0,
                 'data' => $this->defaultGuests(),
-            ])
-            ->add('user', EntityType::class, [
-                'class' => User::class,
-                'choice_label' => 'id',
-                'data' => $this->token->getToken()->getUser()
             ])
         ;
     }

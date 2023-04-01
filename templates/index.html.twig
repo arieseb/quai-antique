@@ -1,47 +1,82 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="carousel-wrapper d-flex flex-row justify-content-center">
-        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                {% for picture in pictures %}
-                    <button
-                        type="button"
-                        data-bs-target="carousel"
-                        data-bs-slide-to="{{ loop.index0 }}"
-                        class="active"
-                        aria-label="Slide {{ loop.index0 }}">
-                    </button>
-                {% endfor %}
+    <h1 class="mt-5 text-center">Bienvenue au restaurant <strong>Le Quai Antique</strong> !</h1>
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col">
+                <p>
+                    Situé au cœur de la magnifique région de Savoie, notre restaurant est un véritable joyau de la
+                    gastronomie française.<br> Notre chef <strong>Arnaud Michant </strong> utilise les ingrédients les
+                    plus frais et les plus savoureux pour créer des plats exquis qui sont inspirés par les traditions
+                    culinaires de la région.
+                </p>
+                <p>
+                    Que vous soyez un amateur de viande, un adepte du fromage ou un gourmand, notre menu
+                    diversifié
+                    propose une gamme de choix pour satisfaire tous les goûts.<br> Dans une ambiance chaleureuse et
+                    conviviale,
+                    notre équipe attentionnée est à votre disposition pour vous offrir une expérience culinaire
+                    inoubliable.
+                </p>
+                <p>
+                    Venez découvrir notre restaurant <strong>Le Quai Antique</strong> et laissez-vous transporter par
+                    les
+                    saveurs et les arômes de la Savoie.
+                </p>
             </div>
-            <div class="carousel-inner">
-                {% for picture in pictures %}
-                    <div class="carousel-item active" data-bs-interval="2500">
-                        <img
-                            src="{{ asset('uploads/' ~ picture.path) }}"
-                            alt="{{ picture.title }}"
-                            class="d-block custom-carousel-item"
-                        />
-                        <div class="carousel-caption d-none d-md-block pictures">
-                            <h5>{{ picture.title }}</h5>
-                        </div>
+            <div class="col d-flex flex-column text-center">
+                <div class="m-5">
+                    <h3>Service du midi</h3>
+                    {% set noon_booking_link = path('app_booking_noon') %}
+                    <a class="btn btn-lg btn-primary" href="{{ noon_booking_link }}">Réserver une table</a>
+                </div>
+                <div class="m-5">
+                    <h3>Service du soir</h3>
+                    {% set evening_booking_link = path('app_booking_evening') %}
+                    <a class="btn btn-lg btn-primary" href="{{ evening_booking_link }}">Réserver une table</a>
+                </div>
+            </div>
+            <div class="carousel-wrapper d-flex flex-row justify-content-center col">
+                <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        {% for picture in pictures %}
+                            <button
+                                    type="button"
+                                    data-bs-target="carousel"
+                                    data-bs-slide-to="{{ loop.index0 }}"
+                                    class="active"
+                                    aria-label="Slide {{ loop.index0 }}">
+                            </button>
+                        {% endfor %}
                     </div>
-                {% endfor %}
+                    <div class="carousel-inner">
+                        {% for picture in pictures %}
+                            <div
+                                    {% if loop.first %} class="carousel-item active" {% else %} class="carousel-item" {% endif %}
+                                    data-bs-interval="2500"
+                            >
+                                <img
+                                        src="{{ asset('uploads/' ~ picture.path) }}"
+                                        alt="{{ picture.title }}"
+                                        class="d-block custom-carousel-item"
+                                />
+                                <div class="carousel-caption d-none d-md-block pictures">
+                                    <h5>{{ picture.title }}</h5>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Précédent</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Suivant</span>
+                    </button>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Précédent</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Suivant</span>
-            </button>
         </div>
     </div>
-    <h3>Service du midi</h3>
-    {% set noon_booking_link = path('app_booking_noon') %}
-    <a class="btn btn-primary" href="{{ noon_booking_link }}">Réserver une table</a>
-    <h3>Service du soir</h3>
-    {% set evening_booking_link = path('app_booking_evening') %}
-    <a class="btn btn-primary" href="{{ evening_booking_link }}">Réserver une table</a>
 {% endblock %}

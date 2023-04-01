@@ -1,42 +1,93 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Notre carte</h2>
-    {% for category in categories %}
-        <h3>{{ category.name }}</h3>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">Nom du plat</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Prix</th>
-                </tr>
-            </thead>
-            {% for dish in dishes %}
-                {% if category.id == dish.category.id %}
-                    <tbody>
+    <div class="container mt-5">
+        <div class="d-flex flex-column align-items-center">
+            <h1>Notre carte</h1>
+            {% for category in categories %}
+                <h3 class="mb-3">{{ category.name }}</h3>
+                <table class="table table-primary table-borderless table-hover w-75">
+                    <thead>
                         <tr>
-                            <td>{{ dish.name }}</td>
-                            <td>{{ dish.description }}</td>
-                            <td>{{ dish.price }}</td>
+                            <th scope="col" class="text-center">Plat</th>
+                            <th scope="col" class="text-center">Description</th>
+                            <th scope="col" class="text-center">Prix</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        {% for dish in dishes %}
+                            {% if category.id == dish.category.id %}
+                                <tr>
+                                    <td class="fw-bold">{{ dish.name }}</td>
+                                    <td class="">{{ dish.description }}</td>
+                                    <td class="card-price text-center">{{ dish.price }}€</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
                     </tbody>
-                {% endif %}
+                </table>
             {% endfor %}
-        </table>
-    {% endfor %}
-    <h2>Nos formules</h2>
-    {% for menu in menus %}
-        <h3>{{ menu.name }}</h3>
-            {% for formula in formulas %}
-                {% if menu.id == formula.menu.id %}
-                    <ul class="list-unstyled">
-                        <li>{{ formula.name }}</li>
-                        <li>{{ formula.period }}</li>
-                        <li>{{ formula.description }}</li>
-                        <li>{{ formula.price }}</li>
-                    </ul>
-                {% endif %}
+        </div>
+    </div>
+    <div class="container mt-5 text-center">
+        <h1  class="mb-3">Nos formules</h1>
+        <div class="accordion accordion-flush" id="menu-accordion">
+            {% for menu in menus %}
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="menu-heading{{ loop.index0 }}">
+                        <button
+                                class="accordion-button fs-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#menu-collapse{{ loop.index0 }}"
+                                aria-expanded="true"
+                                aria-controls="menu-collapse{{ loop.index0 }}"
+                        >
+                            {{ menu.name }}
+                        </button>
+                        <div
+                                id="menu-collapse{{ loop.index0 }}"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="menu-heading{{ loop.index0 }}"
+                                data-bs-parent="menu-accordion"
+                        >
+                            <div class="accordion accordion-flush" id="formula-accordion">
+                                {% for formula in formulas %}
+                                    {% if menu.id == formula.menu.id %}
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header" id="formula-heading{{ loop.index0 }}">
+                                                <button
+                                                        class="accordion-button fs-5"
+                                                        type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#formula-collapse{{ loop.index0 }}"
+                                                        aria-expanded="true"
+                                                        aria-controls="formula-collapse{{ loop.index0 }}"
+                                                >
+                                                    {{ formula.name }}
+                                                </button>
+                                                <div
+                                                        id="formula-collapse{{ loop.index0 }}"
+                                                        class="accordion-collapse collapse show"
+                                                        aria-labelledby="formula-heading{{ loop.index0 }}"
+                                                        data-bs-parent="formula-accordion"
+                                                >
+                                                    <ul class="list-unstyled">
+                                                        <li class="accordion-li card-price mt-2">{{ formula.name }}</li>
+                                                        <li class="accordion-li fst-italic fs-6">{{ formula.period }}</li>
+                                                        <li class="accordion-li fs-5">{{ formula.description }}</li>
+                                                        <li class="accordion-li card-price">{{ formula.price }}€</li>
+                                                    </ul>
+                                                </div>
+                                            </h3>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </h3>
+                </div>
             {% endfor %}
-    {% endfor %}
+        </div>
+    </div>
 {% endblock %}

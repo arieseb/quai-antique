@@ -8,22 +8,48 @@ body {
 
 h1 {
     font-family: 'Montserrat', sans-serif;
+    font-size: 1.8rem;
 }
 
-p {
+h3 {
+    font-size: 1.4rem;
+}
+
+p, td, .accordion-li {
     font-family: 'Hind Madurai', sans-serif;
 }
 
 .custom-carousel-item {
-    width: 500px;
-}
-
-.carousel-wrapper {
-    width: 500px;
+    width: 600px;
 }
 
 .navbar{
     background-color: white;
     border-bottom: #906427 solid 2px;
     font-size: 1.4rem;
+}
+
+footer p {
+    background-color: white;
+    border: #906427 1px solid;
+    border-radius: 10px;
+    padding: 0.8rem;
+}
+
+footer a {
+    color: #392C1E;
+}
+
+tbody td {
+    height: 100px;
+}
+
+th, td {
+    color: #392C1E;
+}
+
+.card-price {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #906427;
 }
