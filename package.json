@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "@symfony/stimulus-bridge": "^3.2.2",
-    "core-js": "^3.29.1"
+    "core-js": "^3.29.1",
+    "mysql": "^2.18.1"
   },
   "scripts": {
     "dev": "webpack",

@@ -1,45 +1,76 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Modifier l'organisation du restaurant</h2>
-    {{ form_start(restaurantForm) }}
-        {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
-    <h3>Service du midi</h3>
-    {{ form_row(restaurantForm.noonOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
-        {{ form_row(restaurantForm.noonClosingHour, { 'label' : 'Horaire de fermeture' }) }}
-    <h3>Service du soir</h3>
-    {{ form_row(restaurantForm.eveningOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
-        {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
-        <input type="submit" class="btn btn-primary" />
-    {{ form_end(restaurantForm) }}
-    <h2>Ajouter une catégorie</h2>
-    {{ form_start(categoryForm) }}
-        {{ form_widget(categoryForm) }}
-        <input type="submit" class="btn btn-primary" />
-    {{ form_end(categoryForm) }}
-    <h2>Ajouter un nouveau plat</h2>
-    {{ form_start(dishForm) }}
-        {{ form_row(dishForm.name, { 'label' : 'Nom' }) }}
-        {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
-        {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
-        {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
-        <input type="submit" class="btn btn-primary" />
-    {{ form_end(dishForm) }}
-    <h2>Ajouter un menu</h2>
-    {{ form_start(menuForm) }}
-        {{ form_row(menuForm.name, { 'label' : 'Nom' }) }}
-        <input type="submit" class="btn btn-primary" />
-    {{ form_end(menuForm) }}
-    <h2>Ajouter une formule</h2>
-    {{ form_start(formulaForm) }}
-        {{ form_row(formulaForm.name, { 'label' : 'Nom' }) }}
-        {{ form_row(formulaForm.period, { 'label' : 'Période pendant laquelle la formule est disponible' }) }}
-        {{ form_row(formulaForm.description, { 'label' : 'Description' }) }}
-        {{ form_row(formulaForm.price, { 'label' : 'Tarif' }) }}
-        {{ form_row(formulaForm.menu, { 'label' : 'Menu auquel appartient la formule' }) }}
-        <input type="submit" class="btn btn-primary" />
-    {{ form_end(formulaForm) }}
-    <h2>Gestion des images du carroussel</h2>
-    {% set manage_picture_link = path('app_picture_index') %}
-    <a class="btn btn-primary" href="{{ manage_picture_link }}">Gestion des images</a>
+    <div class="container mt-5">
+        <h1 class="mb-5 text-center">Panneau d'administration</h1>
+        {% for message in app.flashes('success') %}
+            <div class="d-flex flex-column align-items-center mt-4">
+                <div role='alert' class="alert alert-success text-center w-50">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col">
+            <h2>Organisation du restaurant</h2>
+            {{ form_start(restaurantForm) }}
+                {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
+                <h3>Service du midi</h3>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(restaurantForm.noonOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(restaurantForm.noonClosingHour, { 'label' : 'Horaire de fermeture' }) }}
+                    </div>
+                </div>
+                    <h3>Service du soir</h3>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(restaurantForm.eveningOpeningHour, { 'label' : 'Horaire d\'ouverture' }) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(restaurantForm.eveningClosingHour, { 'label' : 'Horaire de fermeture' }) }}
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary" />
+            {{ form_end(restaurantForm) }}
+                <div class="mt-5 text-center">
+                    {% set manage_picture_link = path('app_picture_index') %}
+                    <a class="btn btn-primary btn-lg mt-3" href="{{ manage_picture_link }}">Gestion des images du carrousel</a>
+                </div>
+            </div>
+            <div class="col">
+                <h2>Ajouter une catégorie</h2>
+                {{ form_start(categoryForm) }}
+                    {{ form_row(categoryForm.name) }}
+                    <input type="submit" class="btn btn-primary" />
+                {{ form_end(categoryForm) }}
+                <h2 class="mt-3">Ajouter un nouveau plat</h2>
+                {{ form_start(dishForm) }}
+                    {{ form_row(dishForm.name, { 'label' : 'Nom' }) }}
+                    {{ form_row(dishForm.price, { 'label' : 'Tarif' }) }}
+                    {{ form_row(dishForm.description, { 'label' : 'Description' }) }}
+                    {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
+                    <input type="submit" class="btn btn-primary" />
+                {{ form_end(dishForm) }}
+            </div>
+            <div class="col">
+                <h2>Ajouter un menu</h2>
+                {{ form_start(menuForm) }}
+                    {{ form_row(menuForm.name) }}
+                    <input type="submit" class="btn btn-primary" />
+                {{ form_end(menuForm) }}
+                <h2 class="mt-3">Ajouter une formule</h2>
+                {{ form_start(formulaForm) }}
+                    {{ form_row(formulaForm.name, { 'label' : 'Nom' }) }}
+                    {{ form_row(formulaForm.period, { 'label' : 'Période pendant laquelle la formule est disponible' }) }}
+                    {{ form_row(formulaForm.description, { 'label' : 'Description' }) }}
+                    {{ form_row(formulaForm.price, { 'label' : 'Tarif' }) }}
+                    {{ form_row(formulaForm.menu, { 'label' : 'Menu auquel appartient la formule' }) }}
+                    <input type="submit" class="btn btn-primary" />
+                {{ form_end(formulaForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -29,4 +29,20 @@ class DishMenuController extends AbstractController
             'formulas' => $formulaRepository->findAll()
         ]);
     }
+
+    #[Route(path: '/formules', name: 'app_formulas')]
+    public function formulas(
+        CategoryRepository $categoryRepository,
+        DishRepository $dishRepository,
+        MenuRepository $menuRepository,
+        FormulaRepository $formulaRepository
+    ): Response
+    {
+        return $this->render('formulas.html.twig', [
+            'categories' => $categoryRepository->findAll(),
+            'dishes' => $dishRepository->findAll(),
+            'menus' => $menuRepository->findAll(),
+            'formulas' => $formulaRepository->findAll()
+        ]);
+    }
 }

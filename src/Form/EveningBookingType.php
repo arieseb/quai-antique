@@ -27,18 +27,6 @@ class EveningBookingType extends AbstractType
         $this->token = $token;
     }
 
-    public function eveningHours(): array
-    {
-        $restaurant = $this->restaurantRepository->findOneBy(['name' => 'Le Quai Antique']);
-        $eveningHours = [];
-        $open = $restaurant->getEveningOpeningHour()->format('H');
-        $close = $restaurant->getEveningClosingHour()->format('H');
-        for ($i = $open; $i < $close; $i++) {
-            $eveningHours[] = $i;
-        }
-        return $eveningHours;
-    }
-
     public function defaultGuests(): int
     {
         if ($this->token->getToken() !== null) {
@@ -67,17 +55,13 @@ class EveningBookingType extends AbstractType
                 'input' => 'datetime',
                 'data' => new \DateTime(),
             ])
-            ->add('eveningBookingTime', TimeType::class, [
-                'input' => 'datetime',
-                'widget' => 'choice',
-                'minutes' => [00, 15, 30, 45],
-                'hours' =>  $this->eveningHours(),
-            ])
             ->add('allergies', TextType::class, [
                 'data' => $this->defaultAllergies(),
+                'required' => false,
             ])
             ->add('guestNumber', NumberType::class, [
                 'scale' => 0,
+                'html5' => true,
                 'data' => $this->defaultGuests(),
             ])
         ;

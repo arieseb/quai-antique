@@ -14,13 +14,7 @@ class AddCategoryType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => ' ',
-                'attr' => [
-                  'placeholder' => 'Catégorie'
-                ],
-                'row_attr' => [
-                    'class' => 'form-floating',
-                ],
+                'label' => false,
             ])
         ;
     }

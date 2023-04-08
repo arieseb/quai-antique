@@ -18,6 +18,7 @@ class PreferencesType extends AbstractType
             ->add('allergies', TextType::class)
             ->add('defaultGuests', NumberType::class, [
                 'scale' => 0,
+                'html5' => true,
             ])
         ;
     }

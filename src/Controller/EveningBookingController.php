@@ -24,7 +24,12 @@ class EveningBookingController extends AbstractController
     }
 
     #[Route(path: '/reserver/soir', name: 'app_booking_evening')]
-    public function booking(Request $request, EntityManagerInterface $entityManager, RestaurantRepository $restaurantRepository, BookingDateRepository $bookingDateRepository): Response
+    public function booking(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        RestaurantRepository $restaurantRepository,
+        BookingDateRepository $bookingDateRepository
+    ): Response
     {
         $restaurant = $restaurantRepository->findOneBy(['name' => 'Le Quai Antique']);
         $roomAvailable = $restaurant->getMaxGuests();
@@ -47,9 +52,11 @@ class EveningBookingController extends AbstractController
                 $bookingDate->setEveningGuests($bookingDate->getEveningGuests() + $booking->getGuestNumber());
                 $booking->setUser($user);
                 $booking->setBookingDate($bookingDate);
+                $booking->setEveningBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
                 $entityManager->persist($bookingDate);
                 $entityManager->persist($booking);
                 $entityManager->flush();
+                $this->addFlash('success', 'Réservation prise en compte');
             }
         } else {
             $newBookingDate = new BookingDate();
@@ -59,8 +66,10 @@ class EveningBookingController extends AbstractController
                 $entityManager->persist($newBookingDate);
                 $booking->setUser($user);
                 $booking->setBookingDate($newBookingDate);
+                $booking->setEveningBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
                 $entityManager->persist($booking);
                 $entityManager->flush();
+                $this->addFlash('success', 'Réservation prise en compte');
             }
         }
 

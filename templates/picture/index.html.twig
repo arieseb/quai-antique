@@ -3,35 +3,47 @@
 {% block title %}Liste des images{% endblock %}
 
 {% block body %}
-    <h1>Liste des images</h1>
+    <div class="container mt-5">
+        <h1 class="mb-3 text-center">Liste des images</h1>
+        <a href="{{ path('app_picture_new') }}" class="btn btn-primary mb-3">Ajouter une nouvelle image</a>
+        <table class="table table-primary table-borderless table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th class="text-center">Aperçu</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for picture in pictures %}
+                <tr>
+                    <td>{{ picture.id }}</td>
+                    <td>{{ picture.title }}</td>
+                    <td class="text-center">
+                        <img
+                            src="{{ asset('uploads/' ~ picture.path) }}"
+                            alt="{{ picture.title }}"
+                            title="{{ picture.title }}"
+                            class="img-thumbnail img-index"
+                        />
+                    </td>
+                    <td>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ path('app_picture_show', {'id': picture.id}) }}" class="btn btn-primary me-2">Voir</a>
+                            <a href="{{ path('app_picture_edit', {'id': picture.id}) }}" class="btn btn-primary me-2">Modifier</a>
+                            {{ include('picture/_delete_form.html.twig') }}
+                        </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune image trouvée</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Aperçu</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for picture in pictures %}
-            <tr>
-                <td>{{ picture.id }}</td>
-                <td>{{ picture.title }}</td>
-                <td><img src="{{ asset('uploads/' ~ picture.path) }}" alt="{{ picture.title }}" title="{{ picture.title }}" class="img-thumbnail" /></td>
-                <td>
-                    <a href="{{ path('app_picture_show', {'id': picture.id}) }}">Voir</a>
-                    <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Aucune image trouvée</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_picture_new') }}">Ajouter une nouvelle image</a>
+        <a href="{{ path('app_picture_new') }}" class="btn btn-primary">Ajouter une nouvelle image</a>
+    </div>
 {% endblock %}

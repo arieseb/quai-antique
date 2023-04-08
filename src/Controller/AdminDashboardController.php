@@ -30,7 +30,7 @@ class AdminDashboardController extends AbstractController
         if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
             $entityManager->persist($category);
             $entityManager->flush();
-            $this->addFlash('success', 'Catégorie créée !');
+            $this->addFlash('success', 'La catégorie a bien été créée');
             return $this->redirect('/admin');
         }
 
@@ -41,7 +41,7 @@ class AdminDashboardController extends AbstractController
         if ($dishForm->isSubmitted() && $dishForm->isValid()) {
             $entityManager->persist($dish);
             $entityManager->flush();
-            $this->addFlash('success', 'Plat créé !');
+            $this->addFlash('success', 'Le plat a bien été créé');
             return $this->redirect('/admin');
         }
 
@@ -51,6 +51,7 @@ class AdminDashboardController extends AbstractController
 
         if ($restaurantForm->isSubmitted() && $restaurantForm->isValid()) {
             $restaurantRepository->save($restaurant, true);
+            $this->addFlash('success', 'Modifications sauvegardées');
             return $this->redirect('/admin');
         }
 
@@ -61,6 +62,7 @@ class AdminDashboardController extends AbstractController
         if ($menuForm->isSubmitted() && $menuForm->isValid()) {
             $entityManager->persist($menu);
             $entityManager->flush();
+            $this->addFlash('success', 'Le menu a bien été créé');
             return $this->redirect('/admin');
         }
 
@@ -71,6 +73,7 @@ class AdminDashboardController extends AbstractController
         if ($formulaForm->isSubmitted() && $formulaForm->isValid()) {
             $entityManager->persist($formula);
             $entityManager->flush();
+            $this->addFlash('success', 'La formule a bien été créée');
             return $this->redirect('/admin');
         }
 

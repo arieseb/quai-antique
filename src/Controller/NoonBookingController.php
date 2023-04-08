@@ -52,9 +52,11 @@ class NoonBookingController extends AbstractController
                 $bookingDate->setNoonGuests($bookingDate->getNoonGuests() + $booking->getGuestNumber());
                 $booking->setUser($user);
                 $booking->setBookingDate($bookingDate);
+                $booking->setNoonBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
                 $entityManager->persist($bookingDate);
                 $entityManager->persist($booking);
                 $entityManager->flush();
+                $this->addFlash('success', 'Réservation prise en compte');
             }
         } else {
             $newBookingDate = new BookingDate();
@@ -64,8 +66,10 @@ class NoonBookingController extends AbstractController
                 $entityManager->persist($newBookingDate);
                 $booking->setUser($user);
                 $booking->setBookingDate($newBookingDate);
+                $booking->setNoonBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
                 $entityManager->persist($booking);
                 $entityManager->flush();
+                $this->addFlash('success', 'Réservation prise en compte');
             }
         }
 

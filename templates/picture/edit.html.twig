@@ -3,13 +3,22 @@
 {% block title %}Modifier l'image{% endblock %}
 
 {% block body %}
-    <h1>Modifier l'image</h1>
+    <div class="container mt-5">
+        <div class="d-flex flex-column align-items-center">
+            <h1 class="mb-3">Modifier l'image</h1>
 
-    <td><img src="{{ asset('uploads/' ~ picture.path) }}" alt="{{ picture.title }}" title="{{ picture.title }}" class="img-thumbnail"/></td>
+            <div class="mb-4">
+                <img
+                    src="{{ asset('uploads/' ~ picture.path) }}"
+                    alt="{{ picture.title }}"
+                    title="{{ picture.title }}"
+                    class="img-thumbnail img-show"
+                />
+            </div>
 
-    {{ include('picture/_form.html.twig', {'button_label': 'Modifier'}) }}
+            {{ include('picture/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    <a href="{{ path('app_picture_index') }}">Retour à la liste</a>
-
-    {{ include('picture/_delete_form.html.twig') }}
+            <a href="{{ path('app_picture_index') }}">Retour à la liste des images</a>
+        </div>
+    </div>
 {% endblock %}

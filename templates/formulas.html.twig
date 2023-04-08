@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5 text-center">
+        <h1  class="mb-3">Nos menus et formules</h1>
+        <div class="accordion accordion-flush" id="menu-accordion">
+            {% for menu in menus %}
+                <div class="accordion-item">
+                    <h3 class="accordion-header" id="menu-heading{{ loop.index0 }}">
+                        <button
+                                class="accordion-button fs-4"
+                                type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#menu-collapse{{ loop.index0 }}"
+                                aria-expanded="true"
+                                aria-controls="menu-collapse{{ loop.index0 }}"
+                        >
+                            {{ menu.name }}
+                        </button>
+                        <div
+                                id="menu-collapse{{ loop.index0 }}"
+                                class="accordion-collapse collapse"
+                                aria-labelledby="menu-heading{{ loop.index0 }}"
+                                data-bs-parent="menu-accordion"
+                        >
+                            <div class="accordion accordion-flush" id="formula-accordion">
+                                {% for formula in formulas %}
+                                    {% if menu.id == formula.menu.id %}
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-header inner-accordion" id="formula-heading{{ loop.index0 }}">
+                                                <div class="accordion-button fs-5 disabled">
+                                                    {{ formula.name }}
+                                                </div>
+                                                <div
+                                                        id="formula-collapse{{ loop.index0 }}"
+                                                        class="accordion-collapse collapse show"
+                                                        aria-labelledby="formula-heading{{ loop.index0 }}"
+                                                >
+                                                    <ul class="list-unstyled">
+                                                        <li class="accordion-li card-price mt-2">{{ formula.name }}</li>
+                                                        <li class="accordion-li fst-italic fs-6">{{ formula.period }}</li>
+                                                        <li class="accordion-li fs-5">{{ formula.description }}</li>
+                                                        <li class="accordion-li card-price">{{ formula.price }}€</li>
+                                                    </ul>
+                                                </div>
+                                            </h3>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -18,16 +18,20 @@ class UpdateRestaurantType extends AbstractType
                 'scale' => 0
             ])
             ->add('noonOpeningHour', TimeType::class, [
-                'input' => 'datetime'
+                'input' => 'datetime',
+                'with_minutes' => false
             ])
             ->add('noonClosingHour',TimeType::class, [
-                'input' => 'datetime'
+                'input' => 'datetime',
+                'with_minutes' => false
             ])
             ->add('eveningOpeningHour', TimeType::class, [
-                'input' => 'datetime'
+                'input' => 'datetime',
+                'with_minutes' => false
             ])
             ->add('eveningClosingHour',TimeType::class, [
-                'input' => 'datetime'
+                'input' => 'datetime',
+                'with_minutes' => false
             ])
         ;
     }

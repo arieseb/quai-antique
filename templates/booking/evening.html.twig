@@ -1,13 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h2>Réserver une table - Service du soir</h2>
-    <p>Il est possible de réserver pour encore  {{ roomAvailable }} couverts</p>
-    {{ form_start(form) }}
-        {{ form_row(form.date, { 'label' : 'Date de la réservation' }) }}
-        {{ form_row(form.eveningBookingTime, { 'label' : 'Heure de la réservation' }) }}
-        {{ form_row(form.guestNumber, { 'label' : 'Nombre de couverts' }) }}
-        {{ form_row(form.allergies, {'label' : 'Allergies'}) }}
-    <input type="submit" />
-    {{ form_end(form) }}
+    <div class="container my-5" id="evening-booking">
+        <div class="d-flex flex-column align-items-center">
+            <h1>Réserver une table - Service du soir</h1>
+            <p class="fs-5">Il est possible de réserver pour encore <strong id="room_available">{{ roomAvailable }}</strong> couverts</p>
+            <div class="form-group w-25">
+                {{ form_start(form) }}
+                    {{ form_row(form.date,{ 'label' : 'Date de la réservation' }) }}
+                    {{ form_row(form.guestNumber, { 'label' : 'Nombre de couverts' }) }}
+                    {{ form_row(form.allergies, {'label' : 'Allergies'}) }}
+                    <label for="evening-button" class="fw-bold">Choisissez l'heure de la réservation</label>
+                    <div class="mt-2 text-center" id="booking-button"></div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="d-flex flex-column align-items-center mt-4">
+                <div role='alert' class="alert alert-success text-center w-50">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <script src="{{ asset('scripts/bookingButtons.js') }}"></script>
+    <script src="{{ asset('scripts/booking.js') }}"></script>
 {% endblock %}

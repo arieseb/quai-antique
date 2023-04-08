@@ -15,7 +15,11 @@ h3 {
     font-size: 1.4rem;
 }
 
-p, td, .accordion-li {
+h2 {
+    font-size: 1.5rem;
+}
+
+p, td, .accordion-li, input, select {
     font-family: 'Hind Madurai', sans-serif;
 }
 
@@ -52,4 +56,28 @@ th, td {
     font-size: 1.6rem;
     font-weight: bold;
     color: #906427;
+}
+
+select {
+    text-align: center;
+}
+
+.form-label, .col-form-label {
+    font-weight: bold;
+}
+
+.img-index {
+    width: 200px;
+}
+
+.img-show {
+    width: 400px;
+}
+
+.inner-accordion > .accordion-button::after {
+    background-image: initial;
+}
+
+.inner-accordion > .accordion-button:not(.collapsed)::after {
+    background-image: initial;
 }

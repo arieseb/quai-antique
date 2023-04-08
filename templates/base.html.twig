@@ -9,129 +9,142 @@
             <!--<link rel="stylesheet" href="assets/css/style.css">-->
             <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {% endblock %}
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </head>
-    <body>
-    <header>
-        <nav class="navbar navbar-expand-lg">
-            {% set route_name = app.request.attributes.get('_route') %}
-            <div class="container-fluid">
-                {% set index_link = path('app_index') %}
-                <a class="navbar-brand" href="{{ index_link }}">
-                    <img src="{{ asset('assets/images/quai-antique.jpg') }}" alt="Logo du Quai Antique"/>
-                </a>
-                <button
-                    type="button"
-                    class="navbar-toggler"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navCollapse"
-                    aria-controls="navCollapse"
-                    aria-expanded="false"
-                    aria-label="Toggle Navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navCollapse">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a
-                                href="{{ index_link }}"
-                                {% if route_name == "app_index" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                                aria-current="page"
-                            >
-                                Accueil
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            {% set menu_link = path('app_menu') %}
-                            <a
-                                href="{{ menu_link }}"
-                                {% if route_name == "app_menu" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                            >
-                                Carte
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a
-                                {% if route_name == "app_booking_noon" or route_name == "app_booking_evening"%}
-                                    class="nav-link dropdown-toggle active"
-                                {% else %}
-                                    class="nav-link dropdown-toggle"
-                                {% endif %}
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                            >
-                                Réserver
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% set noon_link = path('app_booking_noon') %}
-                                <li><a class="dropdown-item" href="{{ noon_link }}">Service du midi</a></li>
-                                {% set evening_link = path('app_booking_evening') %}
-                                <li><a class="dropdown-item" href="{{ evening_link }}">Service du soir</a></li>
-                            </ul>
-                        </li>
-                        {% if app.user == null %}
+    <body class="d-flex flex-column vh-100">
+        <header>
+            <nav class="navbar navbar-expand-lg">
+                {% set route_name = app.request.attributes.get('_route') %}
+                <div class="container-fluid">
+                    {% set index_link = path('app_index') %}
+                    <a class="navbar-brand" href="{{ index_link }}">
+                        <img src="{{ asset('assets/images/quai-antique.jpg') }}" alt="Logo du Quai Antique"/>
+                    </a>
+                    <button
+                        type="button"
+                        class="navbar-toggler"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navCollapse"
+                        aria-controls="navCollapse"
+                        aria-expanded="false"
+                        aria-label="Toggle Navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navCollapse">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
-                                {% set login_link = path('app_login') %}
                                 <a
-                                    href="{{ login_link }}"
-                                    {% if route_name == "app_login" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    href="{{ index_link }}"
+                                    {% if route_name == "app_index" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    aria-current="page"
                                 >
-                                    Se connecter
+                                    Accueil
                                 </a>
                             </li>
                             <li class="nav-item">
-                                {% set register_link = path('app_register') %}
+                                {% set menu_link = path('app_menu') %}
                                 <a
-                                    href="{{ register_link }}"
-                                    {% if route_name == "app_register" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    href="{{ menu_link }}"
+                                    {% if route_name == "app_menu" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
                                 >
-                                    S'enregistrer
+                                    Carte
                                 </a>
                             </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_USER') %}
                             <li class="nav-item">
-                                {% set preferences_link = path('app_preferences') %}
+                                {% set formulas_link = path('app_formulas') %}
                                 <a
-                                    href="{{ preferences_link }}"
-                                    {% if route_name == "app_preferences" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                        href="{{ formulas_link }}"
+                                        {% if route_name == "app_formulas" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
                                 >
-                                    Préférences
+                                    Menus
                                 </a>
                             </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="nav-item">
-                                {% set admin_link = path('app_dashboard') %}
+                            <li class="nav-item dropdown">
                                 <a
-                                    href="{{ admin_link }}"
-                                    {% if route_name == "app_dashboard" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    {% if route_name == "app_booking_noon" or route_name == "app_booking_evening"%}
+                                        class="nav-link dropdown-toggle active"
+                                    {% else %}
+                                        class="nav-link dropdown-toggle"
+                                    {% endif %}
+                                    href="#"
+                                    role="button"
+                                    data-bs-toggle="dropdown"
                                 >
-                                    Administration
+                                    Réserver
                                 </a>
+                                <ul class="dropdown-menu">
+                                    {% set noon_link = path('app_booking_noon') %}
+                                    <li><a class="dropdown-item" href="{{ noon_link }}">Service du midi</a></li>
+                                    {% set evening_link = path('app_booking_evening') %}
+                                    <li><a class="dropdown-item" href="{{ evening_link }}">Service du soir</a></li>
+                                </ul>
                             </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_USER') %}
-                            <li class="nav-item">
-                                {% set logout_link = path('app_logout') %}
-                                <a
-                                        href="{{ logout_link }}"
-                                        {% if route_name == "app_logour" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
-                                >
-                                    Déconnexion
-                                </a>
-                            </li>
-                        {% endif %}
-                    </ul>
+                            {% if app.user == null %}
+                                <li class="nav-item">
+                                    {% set login_link = path('app_login') %}
+                                    <a
+                                        href="{{ login_link }}"
+                                        {% if route_name == "app_login" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    >
+                                        Se connecter
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    {% set register_link = path('app_register') %}
+                                    <a
+                                        href="{{ register_link }}"
+                                        {% if route_name == "app_register" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    >
+                                        S'enregistrer
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item">
+                                    {% set preferences_link = path('app_preferences') %}
+                                    <a
+                                        href="{{ preferences_link }}"
+                                        {% if route_name == "app_preferences" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    >
+                                        Préférences
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li class="nav-item">
+                                    {% set admin_link = path('app_dashboard') %}
+                                    <a
+                                        href="{{ admin_link }}"
+                                        {% if route_name == "app_dashboard" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    >
+                                        Administration
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item">
+                                    {% set logout_link = path('app_logout') %}
+                                    <a
+                                            href="{{ logout_link }}"
+                                            {% if route_name == "app_logour" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                    >
+                                        Déconnexion
+                                    </a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        </nav>
-    </header>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
+            </nav>
+        </header>
+        <div class="flex-grow-1">
+            {% block body %}{% endblock %}
+        </div>
+        <footer class="d-flex flex-column align-items-center mt-5">
+            {% block footer %}{{ render(controller('App\\Controller\\FooterController::footer')) }}{% endblock %}
+        </footer>
     </body>
-    <footer class="d-flex flex-column align-items-center">
-        {% block footer %}{{ render(controller('App\\Controller\\FooterController::footer')) }}{% endblock %}
-    </footer>
 </html>
