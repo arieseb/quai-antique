@@ -33,7 +33,7 @@
                     >
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse" id="navCollapse">
+                    <div class="collapse navbar-collapse justify-content-around" id="navCollapse">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a
@@ -129,13 +129,18 @@
                                     {% set logout_link = path('app_logout') %}
                                     <a
                                             href="{{ logout_link }}"
-                                            {% if route_name == "app_logour" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
+                                            {% if route_name == "app_logout" %} class="nav-link active" {% else %} class="nav-link" {% endif %}
                                     >
                                         Déconnexion
                                     </a>
                                 </li>
                             {% endif %}
                         </ul>
+                        <span class="fs-6 user-notice">
+                            {% if app.user %}
+                                Vous êtes connecté en tant que {{ app.user.userIdentifier }}
+                            {% endif %}
+                        </span>
                     </div>
                 </div>
             </nav>

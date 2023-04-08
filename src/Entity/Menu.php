@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Repository\MenuRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MenuRepository::class)]
 class Menu
@@ -17,6 +17,10 @@ class Menu
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Regex(
+        pattern: '/^([a-zA-Z-\' ]){1,100}$/',
+        message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
+    )]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'menu', targetEntity: Formula::class)]

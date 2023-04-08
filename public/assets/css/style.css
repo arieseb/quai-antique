@@ -81,3 +81,11 @@ select {
 .inner-accordion > .accordion-button:not(.collapsed)::after {
     background-image: initial;
 }
+
+.user-notice {
+    color: #906427;
+}
+
+.invalid-feedback {
+    color: #87090C;
+}

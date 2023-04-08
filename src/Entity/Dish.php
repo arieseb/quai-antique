@@ -6,6 +6,7 @@ use App\Repository\DishRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV7 as Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DishRepository::class)]
 class Dish
@@ -17,9 +18,17 @@ class Dish
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Regex(
+        pattern: '/^([a-zA-Z-\' ]){1,100}$/',
+        message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 5, scale: 2)]
+    #[Assert\Regex(
+        pattern: '/^\d{1,3}((,|.){1}\d{1,2})?$/',
+        message: 'Ne peut contenir qu\'un nombre entier ou décimal'
+    )]
     private ?string $price = null;
 
     #[ORM\Column(type: Types::TEXT)]

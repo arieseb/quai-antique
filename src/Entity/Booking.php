@@ -6,6 +6,7 @@ use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV7 as Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 class Booking
@@ -17,6 +18,10 @@ class Booking
     private ?Uuid $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\GreaterThanOrEqual(
+        value :'today',
+        message: 'Impossible de réserver une date déjà passée'
+    )]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
@@ -27,6 +32,9 @@ class Booking
     private ?User $user = null;
 
     #[ORM\Column]
+    #[Assert\Positive(
+        message: 'Vous devez saisir une valeur positive'
+    )]
     private ?int $guestNumber = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]

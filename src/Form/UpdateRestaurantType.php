@@ -15,7 +15,8 @@ class UpdateRestaurantType extends AbstractType
     {
         $builder
             ->add('maxGuests', NumberType::class, [
-                'scale' => 0
+                'scale' => 0,
+                'html5' => true,
             ])
             ->add('noonOpeningHour', TimeType::class, [
                 'input' => 'datetime',

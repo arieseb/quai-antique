@@ -5,7 +5,7 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,15 +30,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Length(
+        min: 8,
+        minMessage: 'Votre mot de passe doit contenir au minimum 8 caractères'
+    )]
     private ?string $password = null;
 
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^[A-Z]{1}[a-z]{1,}(-{1}[A-Z]{1}[a-z]{1,})?$/',
+        message: 'Doit commencer par une majuscule et ne pas contenir de chiffres. Les noms composés sont séparés par un tiret (-)'
+    )]
     private ?string $firstName = null;
 
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^[A-Z]{1}[a-z]{1,}(-{1}[A-Z]{1}[a-z]{1,})?$/',
+        message: 'Doit commencer par une majuscule et ne pas contenir de chiffres. Les noms composés sont séparés par un tiret (-)'
+    )]
     private ?string $lastName = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Positive(
+        message: 'Vous devez saisir une valeur positive'
+    )]
     private ?int $defaultGuests = null;
 
     #[ORM\Column(length: 255, nullable: true)]

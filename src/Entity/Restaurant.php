@@ -6,6 +6,7 @@ use App\Repository\RestaurantRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV7 as Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RestaurantRepository::class)]
 class Restaurant
@@ -20,6 +21,9 @@ class Restaurant
     private ?string $name = 'Le Quai Antique';
 
     #[ORM\Column]
+    #[Assert\Positive(
+        message: 'Vous devez saisir une valeur positive'
+    )]
     private ?int $maxGuests = null;
 
     #[ORM\Column(type: Types::ARRAY)]
@@ -30,9 +34,6 @@ class Restaurant
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $noonClosingHour = null;
-
-//    #[ORM\Column]
-//    private ?int $currentGuests = 0;
 
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $eveningOpeningHour = null;

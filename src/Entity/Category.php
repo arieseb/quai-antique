@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\UuidV7 as Uuid;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -16,6 +17,10 @@ class Category
     private ?Uuid $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Regex(
+        pattern: '/^([a-zA-Z-]){1,50}$/',
+        message: 'Ne peut contenir que des caractères alphabétiques et des tirets'
+    )]
     private ?string $name = null;
 
     public function getId(): ?Uuid
