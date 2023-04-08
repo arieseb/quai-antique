@@ -3,7 +3,7 @@
 {% block title %}Préférences{% endblock %}
 
 {% block body %}
-    <div class="container mt-5">
+    <div class="container mt-5 mb-2">
         <div class="d-flex flex-column align-items-center">
             <h1 class="mb-3">Vos préférences</h1>
             <p>
@@ -19,4 +19,10 @@
             {{ form_end(form) }}
         </div>
     </div>
+    <img src="{{ asset('assets/images/panorama.jpg') }}" alt="Panorama savoyard" class="img-fluid panorama-img"/>
+    <p class="img-credit text-center">
+        Crédits photo <a href="https://unsplash.com/pt-br/@romwald?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Romuald Ruelle</a>
+        sur <a href="https://unsplash.com/fr/photos/XBU7CMwQ8Rg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+    </p>
+
 {% endblock %}

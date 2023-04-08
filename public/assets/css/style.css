@@ -89,3 +89,7 @@ select {
 .invalid-feedback {
     color: #87090C;
 }
+
+.img-credit {
+    font-size: 0.8rem;
+}
