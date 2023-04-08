@@ -4,7 +4,7 @@
             Le Quai Antique est ouvert les {{ businessDays }},<br>
             de {{ noonOpening }} à {{ noonClosing }} et de {{ eveningOpening }} à {{ eveningClosing }}.
         </p>
-        <a href="#">Mentions légales</a>
-        <a href="#">Confidentialité</a>
+        {% set legal_link = path('app_legal') %}
+        <a href="{{ legal_link }}">Mentions légales</a>
     </div>
 {% endblock %}
