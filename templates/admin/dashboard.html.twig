@@ -12,8 +12,8 @@
                 </div>
             </div>
         {% endfor %}
-        <div class="row">
-            <div class="col">
+        <div class="row justify-content-center">
+            <div class="col-8 col-xl-4">
             <h2>Organisation du restaurant</h2>
             {{ form_start(restaurantForm) }}
                 {{ form_row(restaurantForm.maxGuests, { 'label' : 'Couverts maximum' }) }}
@@ -42,7 +42,7 @@
                     <a class="btn btn-primary btn-lg mt-3" href="{{ manage_picture_link }}">Gestion des images du carrousel</a>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-8 col-xl-4">
                 <h2>Ajouter une catégorie</h2>
                 {{ form_start(categoryForm) }}
                     {{ form_row(categoryForm.name) }}
@@ -57,7 +57,7 @@
                     <input type="submit" class="btn btn-primary" />
                 {{ form_end(dishForm) }}
             </div>
-            <div class="col">
+            <div class="col-8 col-xl-4">
                 <h2>Ajouter un menu</h2>
                 {{ form_start(menuForm) }}
                     {{ form_row(menuForm.name) }}

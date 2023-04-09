@@ -3,45 +3,56 @@
 {% block title %}Connectez-vous !{% endblock %}
 
 {% block body %}
-    <div class="container w-25 mt-5 mb-3">
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+    <div class="container mt-5 mb-3">
+        <div class="row d-flex justify-content-center ">
+            <form method="post" class="col col-sm-8 col-md-6 col-lg-4">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">
-                    Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Se
-                        déconnecter</a>
+                {% if app.user %}
+                    <div class="mb-3">
+                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a
+                                href="{{ path('app_logout') }}">Se
+                            déconnecter</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter :</h1>
+                <label for="inputEmail" class="fw-bold">Email : </label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2"
+                       autocomplete="email" required autofocus>
+                <label for="inputPassword" class="fw-bold">Mot de passe : </label>
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="checkbox mb-3 mt-1">
+                    <label>
+                        <input type="checkbox" name="_remember_me"><span class="fw-bold"> Se rappeler de moi</span>
+                    </label>
                 </div>
-            {% endif %}
-
-            <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter :</h1>
-            <label for="inputEmail" class="fw-bold">Email : </label>
-            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-2"
-                   autocomplete="email" required autofocus>
-            <label for="inputPassword" class="fw-bold">Mot de passe : </label>
-            <input type="password" name="password" id="inputPassword" class="form-control"
-                   autocomplete="current-password" required>
-
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-            <div class="checkbox mb-3 mt-1">
-                <label>
-                    <input type="checkbox" name="_remember_me"><span class="fw-bold"> Se rappeler de moi</span>
-                </label>
-            </div>
-            <div class="text-center mt-2">
-                <button class="btn btn-lg btn-primary" type="submit">
-                    Se connecter
-                </button>
-            </div>
-        </form>
+                <div class="text-center mt-2">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Se connecter
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <img src="{{ asset('assets/images/panorama.jpg') }}" alt="Panorama savoyard" class="img-fluid panorama-img"/>
-    <p class="img-credit text-center">
-        Crédits photo <a href="https://unsplash.com/pt-br/@romwald?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Romuald Ruelle</a>
-        sur <a href="https://unsplash.com/fr/photos/XBU7CMwQ8Rg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-    </p>
+    <div class="d-none d-lg-block">
+        <img src="{{ asset('assets/images/panorama.jpg') }}" alt="Panorama savoyard" class="img-fluid panorama-img"/>
+        <p class="img-credit text-center">
+            Crédits photo
+            <a href="https://unsplash.com/pt-br/@romwald?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+                Romuald Ruelle
+            </a>
+            sur
+            <a href="https://unsplash.com/fr/photos/XBU7CMwQ8Rg?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">
+                Unsplash
+            </a>
+        </p>
+    </div>
 {% endblock %}

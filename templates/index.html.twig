@@ -2,9 +2,9 @@
 
 {% block body %}
     <h1 class="mt-5 text-center">Bienvenue au restaurant <strong>Le Quai Antique</strong> !</h1>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-3">
         <div class="row align-items-center">
-            <div class="col">
+            <div class="col-12 col-md-6 col-xxl-3">
                 <p>
                     Situé à Chambéry, au cœur de la magnifique région de Savoie, notre restaurant est un véritable joyau
                     de la gastronomie française.<br> Notre chef <strong>Arnaud Michant </strong> utilise les ingrédients
@@ -25,7 +25,7 @@
                     saveurs et les arômes de la Savoie.
                 </p>
             </div>
-            <div class="col d-flex flex-column text-center">
+            <div class="col-12 col-md-6 col-xxl-3 flex-column text-center">
                 <div class="m-5">
                     <h3>Service du midi</h3>
                     {% set noon_booking_link = path('app_booking_noon') %}
@@ -37,7 +37,7 @@
                     <a class="btn btn-lg btn-primary" href="{{ evening_booking_link }}">Réserver une table</a>
                 </div>
             </div>
-            <div class="carousel-wrapper d-flex flex-row justify-content-center col">
+            <div class="d-none d-md-flex flex-row justify-content-center col">
                 <div id="carousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         {% for picture in pictures %}

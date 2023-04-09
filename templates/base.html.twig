@@ -2,22 +2,23 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Le Quai Antique{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <!--<link rel="stylesheet" href="assets/css/style.css">-->
             <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         {% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="d-flex flex-column vh-100">
+    <body class="d-flex flex-column vh-100 vw-100">
         <header>
             <nav class="navbar navbar-expand-lg">
                 {% set route_name = app.request.attributes.get('_route') %}
                 <div class="container-fluid">
+                    <span class="d-block d-lg-none mx-5"></span>
                     {% set index_link = path('app_index') %}
                     <a class="navbar-brand" href="{{ index_link }}">
                         <img src="{{ asset('assets/images/quai-antique.jpg') }}" alt="Logo du Quai Antique"/>
@@ -34,7 +35,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-around" id="navCollapse">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav text-center">
                             <li class="nav-item">
                                 <a
                                     href="{{ index_link }}"
@@ -75,7 +76,7 @@
                                 >
                                     Réserver
                                 </a>
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu text-center w-25 mx-auto">
                                     {% set noon_link = path('app_booking_noon') %}
                                     <li><a class="dropdown-item" href="{{ noon_link }}">Service du midi</a></li>
                                     {% set evening_link = path('app_booking_evening') %}
@@ -136,7 +137,7 @@
                                 </li>
                             {% endif %}
                         </ul>
-                        <span class="fs-6 user-notice">
+                        <span class="fs-6 user-notice d-none d-xxl-block mx-0">
                             {% if app.user %}
                                 Vous êtes connecté en tant que {{ app.user.userIdentifier }}
                             {% endif %}

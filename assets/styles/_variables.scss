@@ -2,3 +2,11 @@ $secondary: #392C1E;
 $info: #B6AC97;
 $primary: #906427;
 $table-cell-vertical-align: middle;
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 1080px,
+    xl: 1200px,
+    xxl: 1400px
+);

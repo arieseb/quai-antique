@@ -93,3 +93,23 @@ select {
 .img-credit {
     font-size: 0.8rem;
 }
+
+@media screen and (max-width: 685px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    p, li, td, a.btn-fb {
+        font-size: 0.9rem;
+    }
+
+    caption {
+        font-size: 0.8rem;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .col-form-label {
+        font-size: 0.8rem;
+    }
+}

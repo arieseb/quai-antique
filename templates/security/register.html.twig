@@ -3,35 +3,37 @@
 {% block body %}
     <div class="container mt-5">
         <div class="d-flex flex-column align-items-center">
-            <h1>Enregistrez un compte sur notre site</h1>
-            <p>
+            <h1 class="text-center">Enregistrez un compte sur notre site</h1>
+            <p class="d-none d-sm-block text-center">
                 En créant un compte, vous pourrez renseigner vos préférences, qui apparaîtront par défaut dans les
                 formulaires de réservation.
             </p>
-            <div class="form-group w-50">
-                {{ form_start(form) }}
-                    {{ form_row(form.email, { 'label' : 'E-mail' }) }}
-                    {{ form_row(form.password, { 'label' : 'Mot de passe' }) }}
-                    {{ form_row(form.firstname, { 'label' : 'Prénom' }) }}
-                    {% for error in errors %}
-                        {% if error.propertyPath == 'data.firstName' %}
-                            <div class="invalid-feedback d-block mb-3">
-                                {{ error.message }}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                    {{ form_row(form.lastname, { 'label' : 'Nom' }) }}
-                    {% for error in errors %}
-                        {% if error.propertyPath == 'data.lastName' %}
-                            <div class="invalid-feedback d-block mb-3">
-                                {{ error.message }}
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                <div class="text-center">
-                    <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+            <div class="row d-flex justify-content-center w-100">
+                <div class="form-group col col-sm-8 col-md-6 col-lg-4">
+                    {{ form_start(form) }}
+                        {{ form_row(form.email, { 'label' : 'E-mail' }) }}
+                        {{ form_row(form.password, { 'label' : 'Mot de passe' }) }}
+                        {{ form_row(form.firstname, { 'label' : 'Prénom' }) }}
+                        {% for error in errors %}
+                            {% if error.propertyPath == 'data.firstName' %}
+                                <div class="invalid-feedback d-block mb-3">
+                                    {{ error.message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        {{ form_row(form.lastname, { 'label' : 'Nom' }) }}
+                        {% for error in errors %}
+                            {% if error.propertyPath == 'data.lastName' %}
+                                <div class="invalid-feedback d-block mb-3">
+                                    {{ error.message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-lg btn-primary">Envoyer</button>
+                    </div>
+                    {{ form_end(form) }}
                 </div>
-                {{ form_end(form) }}
             </div>
         </div>
     </div>
