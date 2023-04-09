@@ -17,7 +17,7 @@ class Formula
 
     #[ORM\Column(length: 100)]
     #[Assert\Regex(
-        pattern: '/^([a-zA-Z-\' ]){1,100}$/',
+        pattern: '/^([a-zA-Z-\'éèêëïàùôç ]){1,100}$/',
         message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
     )]
     private ?string $name = null;
@@ -27,7 +27,7 @@ class Formula
 
     #[ORM\Column(length: 255)]
     #[Assert\Regex(
-        pattern: '/^([a-zA-Z-\'() ]){1,100}$/',
+        pattern: '/^([a-zA-Z-\'\'éèêëïàùôç() ]){1,100}$/',
         message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
     )]
     private ?string $period = null;
