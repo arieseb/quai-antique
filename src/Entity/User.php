@@ -10,8 +10,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\UuidV7 as Uuid;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('email', message: 'Cette adresse est déjà utilisée')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -34,18 +36,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         min: 8,
         minMessage: 'Votre mot de passe doit contenir au minimum 8 caractères'
     )]
+    #
     private ?string $password = null;
 
     #[ORM\Column]
     #[Assert\Regex(
-        pattern: '/^[A-Z]{1}[a-z]{1,}(-{1}[A-Z]{1}[a-z]{1,})?$/',
+        pattern: '/^[A-Z]{1}[a-zéèêëïàùôçâ]{1,}(-{1}[A-Z]{1}[a-zéèêëïàùôçâ]{1,})?$/',
         message: 'Doit commencer par une majuscule et ne pas contenir de chiffres. Les noms composés sont séparés par un tiret (-)'
     )]
     private ?string $firstName = null;
 
     #[ORM\Column]
     #[Assert\Regex(
-        pattern: '/^[A-Z]{1}[a-z]{1,}(-{1}[A-Z]{1}[a-z]{1,})?$/',
+        pattern: '/^[a-zA-Zéèêëïàùôçâ]{1,}(-{1}[a-zA-Zéèêëïàùôçâ]{1,})?$/',
         message: 'Doit commencer par une majuscule et ne pas contenir de chiffres. Les noms composés sont séparés par un tiret (-)'
     )]
     private ?string $lastName = null;

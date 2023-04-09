@@ -19,7 +19,7 @@ class Dish
 
     #[ORM\Column(length: 255)]
     #[Assert\Regex(
-        pattern: '/^([a-zA-Z-\'éèêëïàùôç ]){1,100}$/',
+        pattern: '/^([a-zA-Z-\'éèêëïàùôçâ ]){1,100}$/',
         message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
     )]
     private ?string $name = null;

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegisterController extends AbstractController
@@ -19,7 +21,8 @@ class RegisterController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager,
         UserPasswordHasherInterface $passwordHasher,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        TokenStorageInterface $storage,
     ): Response
     {
         $user = new User();
@@ -33,7 +36,9 @@ class RegisterController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
             $this->addFlash('success', 'Inscription réussie !');
-            return $this->redirect('/login');
+            $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
+            $storage->setToken($token);
+            return $this->redirectToRoute('app_index');
         }
 
         return $this->render('security/register.html.twig', [

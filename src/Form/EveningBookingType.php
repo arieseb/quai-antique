@@ -3,31 +3,27 @@
 namespace App\Form;
 
 use App\Entity\Booking;
-use App\Repository\RestaurantRepository;
 use App\Repository\UserRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class EveningBookingType extends AbstractType
 {
-    private RestaurantRepository $restaurantRepository;
     private TokenStorageInterface $token;
     private UserRepository $userRepository;
 
-    public function __construct(RestaurantRepository $restaurantRepository, TokenStorageInterface $token, UserRepository $userRepository)
+    public function __construct(TokenStorageInterface $token, UserRepository $userRepository)
     {
-        $this->restaurantRepository = $restaurantRepository;
         $this->userRepository= $userRepository;
         $this->token = $token;
     }
 
-    public function defaultGuests(): int
+    public function defaultGuests(): ?int
     {
         if ($this->token->getToken() !== null) {
             $user = $this->userRepository->findOneBy(['email' => $this->token->getToken()->getUserIdentifier()]);

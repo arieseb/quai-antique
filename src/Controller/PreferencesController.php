@@ -29,6 +29,7 @@ class PreferencesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success', 'Vos préférences ont été enregistrées');
         }
 
         return $this->render('preferences.html.twig', [

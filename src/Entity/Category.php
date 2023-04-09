@@ -18,7 +18,7 @@ class Category
 
     #[ORM\Column(length: 50)]
     #[Assert\Regex(
-        pattern: '/^([a-zA-Z-\'éèêëïàùôç ]){1,50}$/',
+        pattern: '/^([a-zA-Z-\'éèêëïàùôçâ ]){1,50}$/',
         message: 'Ne peut contenir que des caractères alphabétiques et des tirets'
     )]
     private ?string $name = null;
