@@ -22,18 +22,23 @@ class PreferencesController extends AbstractController
     #[Route(path: '/preferences', name: 'app_preferences')]
     public function preferences(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $this->token->getToken()->getUser();
-        $form = $this->createForm(PreferencesType::class, $user);
-        $form->handleRequest($request);
+        if ($this->isGranted('ROLE_USER')) {
+            $user = $this->token->getToken()->getUser();
+            $form = $this->createForm(PreferencesType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
-            $this->addFlash('success', 'Vos préférences ont été enregistrées');
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($user);
+                $entityManager->flush();
+                $this->addFlash('success', 'Vos préférences ont été enregistrées');
+            }
+
+            return $this->render('preferences.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        } else {
+            $this->addFlash('error', 'Vous devez être connecté pour accéder à cette page');
+            return $this->redirectToRoute('app_login');
         }
-
-        return $this->render('preferences.html.twig', [
-            'form' => $form->createView(),
-        ]);
     }
 }

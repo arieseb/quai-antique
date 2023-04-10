@@ -48,6 +48,13 @@ class EveningBookingController extends AbstractController
         if ($bookingDate !== null) {
             $roomAvailable = $restaurant->getMaxGuests() - $bookingDate->getEveningGuests();
             if ($form->isSubmitted() && $form->isValid()) {
+                if (($roomAvailable - $booking->getGuestNumber()) < 0) {
+                    $this->addFlash('error', 'Il n\'y a plus suffisamment de place disponible pour réserver pendant ce service');
+                    return $this->render('booking/evening.html.twig', [
+                        'form' => $form->createView(),
+                        'roomAvailable' => $roomAvailable,
+                    ]);
+                }
                 $bookingDate->setDate($booking->getDate());
                 $bookingDate->setEveningGuests($bookingDate->getEveningGuests() + $booking->getGuestNumber());
                 $booking->setUser($user);
@@ -61,6 +68,13 @@ class EveningBookingController extends AbstractController
         } else {
             $newBookingDate = new BookingDate();
             if ($form->isSubmitted() && $form->isValid()) {
+                if (($roomAvailable - $booking->getGuestNumber()) < 0) {
+                    $this->addFlash('error', 'Il n\'y a plus suffisamment de place disponible pour réserver pendant ce service');
+                    return $this->render('booking/evening.html.twig', [
+                        'form' => $form->createView(),
+                        'roomAvailable' => $roomAvailable,
+                    ]);
+                }
                 $newBookingDate->setDate($booking->getDate());
                 $newBookingDate->setEveningGuests($booking->getGuestNumber());
                 $entityManager->persist($newBookingDate);

@@ -35,7 +35,6 @@ class RegisterController extends AbstractController
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();
-            $this->addFlash('success', 'Inscription réussie !');
             $token = new UsernamePasswordToken($user, 'main', $user->getRoles());
             $storage->setToken($token);
             return $this->redirectToRoute('app_index');

@@ -4,18 +4,17 @@
 
 {% block body %}
     <div class="container mt-5 mb-3">
+        {% for message in app.flashes('error') %}
+            <div class="d-flex flex-column align-items-center mt-4">
+                <div role='alert' class="alert alert-danger text-center">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
         <div class="row d-flex justify-content-center ">
             <form method="post" class="col col-sm-8 col-md-6 col-lg-4">
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
-
-                {% if app.user %}
-                    <div class="mb-3">
-                        Vous êtes connecté en tant que {{ app.user.userIdentifier }}, <a
-                                href="{{ path('app_logout') }}">Se
-                            déconnecter</a>
-                    </div>
                 {% endif %}
 
                 <h1 class="h3 mb-3 font-weight-normal text-center">Veuillez vous connecter :</h1>
