@@ -56,6 +56,11 @@
                     {{ form_row(dishForm.category, { 'label' : 'Catégorie' }) }}
                     <input type="submit" class="btn btn-primary" />
                 {{ form_end(dishForm) }}
+                <h2 class="mt-3">Supprimer un plat</h2>
+                {{ form_start(deleteDishForm) }}
+                {{ form_row(deleteDishForm.id) }}
+                <input type="submit" class="btn btn-primary" />
+                {{ form_end(deleteDishForm) }}
             </div>
             <div class="col-8 col-xl-4">
                 <h2>Ajouter un menu</h2>
@@ -63,6 +68,11 @@
                     {{ form_row(menuForm.name) }}
                     <input type="submit" class="btn btn-primary" />
                 {{ form_end(menuForm) }}
+                <h2 class="mt-3">Supprimer un menu</h2>
+                {{ form_start(deleteMenuForm) }}
+                    {{ form_row(deleteMenuForm.id) }}
+                    <input type="submit" class="btn btn-primary" />
+                {{ form_end(deleteMenuForm) }}
                 <h2 class="mt-3">Ajouter une formule</h2>
                 {{ form_start(formulaForm) }}
                     {{ form_row(formulaForm.name, { 'label' : 'Nom' }) }}

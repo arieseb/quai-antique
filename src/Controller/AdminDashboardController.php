@@ -8,6 +8,8 @@ use App\Entity\Formula;
 use App\Entity\Menu;
 use App\Form\AddCategoryType;
 use App\Form\AddDishType;
+use App\Form\DeleteMenuType;
+use App\Form\DeleteDishType;
 use App\Form\FormulaType;
 use App\Form\MenuType;
 use App\Form\UpdateRestaurantType;
@@ -21,7 +23,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminDashboardController extends AbstractController
 {
     #[Route(path: '/admin', name: 'app_dashboard')]
-    public function index(Request $request, EntityManagerInterface $entityManager, RestaurantRepository $restaurantRepository): Response
+    public function index(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        RestaurantRepository $restaurantRepository,
+    ): Response
     {
         $category = new Category();
         $categoryForm = $this->createForm(AddCategoryType::class, $category);
@@ -42,6 +48,16 @@ class AdminDashboardController extends AbstractController
             $entityManager->persist($dish);
             $entityManager->flush();
             $this->addFlash('success', 'Le plat a bien été créé');
+            return $this->redirect('/admin');
+        }
+
+        $deleteDishForm = $this->createForm(DeleteDishType::class);
+        $deleteDishForm->handleRequest($request);
+        if ($deleteDishForm->isSubmitted() && $deleteDishForm->isValid()) {
+            $dishToDelete = $entityManager->getRepository(Dish::class)->find($deleteDishForm->get('id')->getData());
+            $entityManager->remove($dishToDelete);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le plat a bien été supprimé');
             return $this->redirect('/admin');
         }
 
@@ -66,6 +82,16 @@ class AdminDashboardController extends AbstractController
             return $this->redirect('/admin');
         }
 
+        $deleteMenuForm = $this->createForm(DeleteMenuType::class);
+        $deleteMenuForm->handleRequest($request);
+        if ($deleteMenuForm->isSubmitted() && $deleteMenuForm->isValid()) {
+            $menuToDelete = $entityManager->getRepository(Menu::class)->find($deleteMenuForm->get('id')->getData());
+            $entityManager->remove($menuToDelete);
+            $entityManager->flush();
+            $this->addFlash('success', 'Le menu a bien été supprimé');
+            return $this->redirect('/admin');
+        }
+
         $formula = new Formula();
         $formulaForm = $this->createForm(FormulaType::class, $formula);
         $formulaForm->handleRequest($request);
@@ -83,6 +109,8 @@ class AdminDashboardController extends AbstractController
             'restaurantForm' => $restaurantForm->createView(),
             'menuForm' => $menuForm->createView(),
             'formulaForm' => $formulaForm->createView(),
+            'deleteMenuForm' => $deleteMenuForm->createView(),
+            'deleteDishForm' => $deleteDishForm->createView(),
         ]);
     }
 }

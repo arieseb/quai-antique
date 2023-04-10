@@ -23,7 +23,7 @@ class Menu
     )]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'menu', targetEntity: Formula::class)]
+    #[ORM\OneToMany(mappedBy: 'menu', targetEntity: Formula::class, orphanRemoval: true)]
     private Collection $formulas;
 
     public function __construct()
