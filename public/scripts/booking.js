@@ -23,7 +23,7 @@ if (noonDateForm) {
 
 if (eveningDateForm) {
     eveningDateForm.addEventListener('input', () => {
-        let date = JSON.stringify({date: noonDateForm.value})
+        let date = JSON.stringify({date: eveningDateForm.value})
         xhr.open('POST', '/evening_booking_data', true)
         xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
         xhr.setRequestHeader('Content-Type', 'application/json')
