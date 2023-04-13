@@ -5,12 +5,12 @@
 {% block body %}
     <div class="container mt-5 text-center">
         <h1  class="mb-3">Nos menus et formules</h1>
-        <div class="accordion accordion-flush" id="menu-accordion">
+        <div class="accordion" id="menu-accordion">
             {% for menu in menus %}
                 <div class="accordion-item">
                     <h3 class="accordion-header" id="menu-heading{{ loop.index0 }}">
                         <button
-                                class="accordion-button fs-4"
+                                class="accordion-button fs-4 collapsed"
                                 type="button"
                                 data-bs-toggle="collapse"
                                 data-bs-target="#menu-collapse{{ loop.index0 }}"
@@ -30,7 +30,7 @@
                                     {% if menu.id == formula.menu.id %}
                                         <div class="accordion-item">
                                             <h3 class="accordion-header inner-accordion" id="formula-heading{{ loop.index0 }}">
-                                                <div class="accordion-button fs-5 disabled">
+                                                <div class="accordion-button fs-5">
                                                     {{ formula.name }}
                                                 </div>
                                                 <div
