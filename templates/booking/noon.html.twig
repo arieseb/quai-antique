@@ -5,8 +5,21 @@
 {% block body %}
     <div class="container my-5" id="noon-booking">
         <div class="d-flex flex-column align-items-center">
-            <h1 class="text-center">Réserver une table - Service du midi</h1>
-            <p class="fs-5 text-center">Il est possible de réserver pour encore <strong id="room_available">{{ roomAvailable }}</strong> couverts</p>
+            <h1 class="text-center">
+                Réserver une table
+                <span class="d-none d-md-inline"> - </span>
+                <span class="d-md-none"><br></span>
+                Service du midi
+            </h1>
+            {% if roomAvailable > 0 %}
+                <p class="fs-5 text-center">
+                    Il est possible de réserver pour encore <strong id="room_available">{{ roomAvailable }}</strong> couverts
+                </p>
+            {% else %}
+                <p class="fs-5 text-center">
+                    Il n'y a plus de place pour réserver une table à ce service, choisissez une autre date
+                </p>
+            {% endif %}
             {% for message in app.flashes('error') %}
                 <div class="d-flex flex-column align-items-center mt-2">
                     <div role='alert' class="alert alert-danger text-center">
@@ -24,7 +37,7 @@
                             <div class="text-center">
                                 <label for="noon-button" class="fw-bold">Choisissez l'heure de la réservation</label>
                             </div>
-                            <div class="">
+                            <div>
                                 <div class="mt-2 text-center" id="booking-button"></div>
                             </div>
                         </div>

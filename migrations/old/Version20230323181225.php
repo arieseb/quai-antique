@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace DoctrineMigrations;
+namespace DoctrineMigrations\old;
 
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230319221743 extends AbstractMigration
+final class Version20230323181225 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20230319221743 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE booking ADD evening_booking_time TIME NOT NULL, CHANGE booking_time noon_booking_time TIME NOT NULL');
+        $this->addSql('ALTER TABLE user DROP allergies');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE booking ADD booking_time TIME NOT NULL, DROP noon_booking_time, DROP evening_booking_time');
+        $this->addSql('ALTER TABLE user ADD allergies LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:array)\'');
     }
 }

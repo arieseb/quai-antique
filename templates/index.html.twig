@@ -1,7 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="mt-5 text-center">Bienvenue au restaurant <strong>Le Quai Antique</strong> !</h1>
+    <h1 class="mt-5 text-center">
+        Bienvenue au restaurant <span class="d-md-none"><br></span><strong class="fw-bolder">Le Quai Antique</strong> !
+    </h1>
     <div class="container mt-5 mb-3">
         <div class="row align-items-center">
             <div class="col-12 col-md-6 col-xxl-3">
@@ -11,7 +13,7 @@
                     les plus frais et les plus savoureux pour créer des plats exquis qui sont inspirés par les traditions
                     culinaires de la région.
                 </p>
-                <p>
+                <p class="d-none d-md-block">
                     Que vous soyez un amateur de viande, un adepte du fromage ou un gourmand, notre menu
                     diversifié
                     propose une gamme de choix pour satisfaire tous les goûts.<br> Dans une ambiance chaleureuse et

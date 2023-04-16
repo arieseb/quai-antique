@@ -12,7 +12,7 @@
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">Plat</th>
-                            <th scope="col" class="text-center">Description</th>
+                            <th scope="col" class="text-center d-none d-md-block">Description</th>
                             <th scope="col" class="text-center">Prix</th>
                         </tr>
                     </thead>
@@ -21,7 +21,7 @@
                             {% if category.id == dish.category.id %}
                                 <tr>
                                     <td class="fw-bold">{{ dish.name }}</td>
-                                    <td>{{ dish.description }}</td>
+                                    <td class="d-none d-md-block">{{ dish.description }}</td>
                                     <td class="card-price text-center">{{ dish.price }}€</td>
                                 </tr>
                             {% endif %}
