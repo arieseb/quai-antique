@@ -60,7 +60,7 @@ la dernière version de Git compatible avec le système d'exploitation
 ### 8 - Vous pouvez désormais vous connecter à l'application à l'adresse ``quai-antique.localhost``
 Le restaurant et un compte administrateur ont été automatiquement créés en base de données
 par l'application  
-Les informations de connexion au compte administrateurs sont renseignés dans la copie
+Les informations de connexion au compte administrateur sont renseignés dans la copie
 
 ### 9 - Ajouter les images du carrousel 
  - Se connecter en tant qu'administrateur et se rendre dans le panneau d'administration
