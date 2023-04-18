@@ -46,8 +46,13 @@
             </div>
         {% for message in app.flashes('success') %}
         <div class="d-flex flex-column align-items-center mt-4">
-            <div role='alert' class="alert alert-success text-center w-50">
+            <div role='alert' class="alert alert-success text-center w-100">
                 {{ message }}
+                <ul class="list-unstyled mt-2 text-start">
+                    <li>Date : {{ formData.date|format_datetime('short', 'none', locale='fr') }}</li>
+                    <li>Heure : {{ bookingTime|format_datetime('none', 'short', locale='fr') }}</li>
+                    <li>{{ formData.guestNumber }} couvert(s)</li>
+                </ul>
             </div>
         </div>
         {% endfor %}

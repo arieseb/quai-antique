@@ -103,6 +103,10 @@ select {
     font-size: 0.8rem;
 }
 
+.list-unstyled {
+    list-style: none;
+}
+
 @media screen and (max-width: 685px) {
     h1 {
         font-size: 1.6rem;

@@ -13,12 +13,24 @@ if (noonDateForm) {
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 guestsResult = xhr.response
-                const noonData = JSON.parse(guestsResult)
-                roomAvailable.innerText = noonData
+                roomAvailable.innerText = JSON.parse(guestsResult)
             }
         })
         xhr.send(date)
     })
+    window.onload = () => {
+        let date = JSON.stringify({date: noonDateForm.value})
+        xhr.open('POST', '/noon_booking_data', true)
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.addEventListener('readystatechange', () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                guestsResult = xhr.response
+                roomAvailable.innerText = JSON.parse(guestsResult)
+            }
+        })
+        xhr.send(date)
+    }
 }
 
 if (eveningDateForm) {
@@ -30,10 +42,22 @@ if (eveningDateForm) {
         xhr.addEventListener('readystatechange', () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 guestsResult = xhr.response
-                const eveData = JSON.parse(guestsResult)
-                roomAvailable.innerText = eveData
+                roomAvailable.innerText = JSON.parse(guestsResult)
             }
         })
         xhr.send(date)
     })
+    window.onload = () => {
+        let date = JSON.stringify({date: eveningDateForm.value})
+        xhr.open('POST', '/evening_booking_data', true)
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest')
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.addEventListener('readystatechange', () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                guestsResult = xhr.response
+                roomAvailable.innerText = JSON.parse(guestsResult)
+            }
+        })
+        xhr.send(date)
+    }
 }

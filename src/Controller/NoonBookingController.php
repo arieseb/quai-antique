@@ -41,8 +41,10 @@ class NoonBookingController extends AbstractController
         }
 
         $booking = new Booking();
+        $bookingTime = null;
         $form = $this->createForm(NoonBookingType::class, $booking);
         $form->handleRequest($request);
+        $formData = $form->getData();
         $formDate = $form->get('date')->getData()->format('Y-m-d');
         $bookingDate = $bookingDateRepository->findOneBy(['date' => \DateTime::createFromFormat('Y-m-d', $formDate)]);
         if ($bookingDate !== null) {
@@ -59,11 +61,12 @@ class NoonBookingController extends AbstractController
                 $bookingDate->setNoonGuests($bookingDate->getNoonGuests() + $booking->getGuestNumber());
                 $booking->setUser($user);
                 $booking->setBookingDate($bookingDate);
-                $booking->setNoonBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
+                $bookingTime = \DateTime::createFromFormat('H:i', $_POST['submit']);
+                $booking->setNoonBookingTime($bookingTime);
                 $entityManager->persist($bookingDate);
                 $entityManager->persist($booking);
                 $entityManager->flush();
-                $this->addFlash('success', 'Réservation prise en compte');
+                $this->addFlash('success', 'Réservation prise en compte :');
             }
         } else {
             $newBookingDate = new BookingDate();
@@ -80,7 +83,8 @@ class NoonBookingController extends AbstractController
                 $entityManager->persist($newBookingDate);
                 $booking->setUser($user);
                 $booking->setBookingDate($newBookingDate);
-                $booking->setNoonBookingTime(\DateTime::createFromFormat('H:i', $_POST['submit']));
+                $bookingTime = \DateTime::createFromFormat('H:i', $_POST['submit']);
+                $booking->setNoonBookingTime($bookingTime);
                 $entityManager->persist($booking);
                 $entityManager->flush();
                 $this->addFlash('success', 'Réservation prise en compte');
@@ -90,6 +94,8 @@ class NoonBookingController extends AbstractController
         return $this->render('booking/noon.html.twig', [
             'form' => $form->createView(),
             'roomAvailable' => $roomAvailable,
+            'formData' => $formData,
+            'bookingTime' => $bookingTime,
         ]);
     }
 }
