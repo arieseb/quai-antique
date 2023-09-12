@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FooterController extends AbstractController
 {
+    /**
+     * @param RestaurantRepository $restaurantRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     public function footer(RestaurantRepository $restaurantRepository, EntityManagerInterface $entityManager):Response
     {
         if (!$restaurantRepository->findAll()) {

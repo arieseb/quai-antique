@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class CreateRestaurant extends AbstractController
 {
-    //#[Route(path: '/create', name: 'app_create')]
+    /**
+     * @param Connection $connection
+     * @return void
+     * @throws Exception
+     */
     public function new(Connection $connection) :void
     {
 

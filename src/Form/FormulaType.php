@@ -36,3 +36,4 @@ class FormulaType extends AbstractType
         ]);
     }
 }
+//TODO : Formulaire de suppression des formules

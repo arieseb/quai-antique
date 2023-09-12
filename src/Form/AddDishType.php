@@ -35,3 +35,5 @@ class AddDishType extends AbstractType
         ]);
     }
 }
+
+//TODO : Pouvoir changer la catégorie d'un plat

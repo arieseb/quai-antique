@@ -17,10 +17,10 @@ class Dish
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
     private ?Uuid $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     #[Assert\Regex(
-        pattern: '/^([a-zA-Z-\'éèêëïàùôçâ ]){1,100}$/',
-        message: 'Doit contenir des caractères alphabétiques,des tirets et des apostrophes'
+        pattern: '/^[\p{L}\p{M}\p{P}\p{Z}]{1,100}$/',
+        message: 'Doit contenir des caractères alphabétiques et de la ponctuation'
     )]
     private ?string $name = null;
 
@@ -32,6 +32,10 @@ class Dish
     private ?string $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Regex(
+        pattern: '/^[\p{L}\p{M}\p{N}\p{P}\p{Z}]+$/',
+        message: 'Doit contenir des caractères alphanumériques et de la ponctuation'
+    )]
     private ?string $description = null;
 
     #[ORM\ManyToOne]

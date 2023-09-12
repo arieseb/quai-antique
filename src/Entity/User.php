@@ -29,14 +29,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var ?string The hashed password
      */
     #[ORM\Column]
-    #[Assert\Length(
-        min: 8,
-        minMessage: 'Votre mot de passe doit contenir au minimum 8 caractères'
+    #[Assert\Regex(
+        pattern: '/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{8,}$/',
+        message: 'Votre mot de passe doit contenir 8 caractères dont une majuscule, un chiffre et un caractère spécial'
     )]
-    #
     private ?string $password = null;
 
     #[ORM\Column]

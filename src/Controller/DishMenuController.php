@@ -14,33 +14,35 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DishMenuController extends AbstractController
 {
+    /**
+     * @param CategoryRepository $categoryRepository
+     * @param DishRepository $dishRepository
+     * @return Response
+     */
     #[Route(path: '/carte', name: 'app_menu')]
     public function index(
         CategoryRepository $categoryRepository,
         DishRepository $dishRepository,
-        MenuRepository $menuRepository,
-        FormulaRepository $formulaRepository
     ): Response
     {
         return $this->render('menu.html.twig', [
             'categories' => $categoryRepository->findAll(),
             'dishes' => $dishRepository->findAll(),
-            'menus' => $menuRepository->findAll(),
-            'formulas' => $formulaRepository->findAll()
         ]);
     }
 
+    /**
+     * @param MenuRepository $menuRepository
+     * @param FormulaRepository $formulaRepository
+     * @return Response
+     */
     #[Route(path: '/formules', name: 'app_formulas')]
     public function formulas(
-        CategoryRepository $categoryRepository,
-        DishRepository $dishRepository,
         MenuRepository $menuRepository,
         FormulaRepository $formulaRepository
     ): Response
     {
         return $this->render('formulas.html.twig', [
-            'categories' => $categoryRepository->findAll(),
-            'dishes' => $dishRepository->findAll(),
             'menus' => $menuRepository->findAll(),
             'formulas' => $formulaRepository->findAll()
         ]);

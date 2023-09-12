@@ -10,10 +10,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 
+
 class BookingDataController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param RestaurantRepository $restaurantRepository
+     * @param BookingDateRepository $bookingDateRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse|void
+     */
     #[Route(path: '/noon_booking_data', name: 'noon_booking_data')]
-    public function noonBookingData(Request $request, RestaurantRepository $restaurantRepository, BookingDateRepository $bookingDateRepository, SerializerInterface $serializer)
+    public function noonBookingData(
+        Request $request,
+        RestaurantRepository $restaurantRepository,
+        BookingDateRepository $bookingDateRepository,
+        SerializerInterface $serializer
+    )
     {
         $restaurant = $restaurantRepository->findOneBy(['name' => 'Le Quai Antique']);
         $maxGuests = $restaurant->getMaxGuests();
@@ -30,6 +43,13 @@ class BookingDataController extends AbstractController
         }
     }
 
+    /**+
+     * @param Request $request
+     * @param RestaurantRepository $restaurantRepository
+     * @param BookingDateRepository $bookingDateRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
+     */
     #[Route(path: '/evening_booking_data', name: 'evening_booking_data')]
     public function eveningBookingData(Request $request, RestaurantRepository $restaurantRepository, BookingDateRepository $bookingDateRepository, SerializerInterface $serializer)
     {

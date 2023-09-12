@@ -19,6 +19,11 @@ class PreferencesController extends AbstractController
         $this->token = $token;
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route(path: '/preferences', name: 'app_preferences')]
     public function preferences(Request $request, EntityManagerInterface $entityManager): Response
     {

@@ -19,11 +19,15 @@ security:
             custom_authenticator: App\Security\Authenticator
             logout:
                 path: app_logout
+                target: app_index
                 # where to redirect after logout
                 # target: app_any_route
             remember_me:
                 secret: '%kernel.secret%'
                 lifetime: 604800
+        secured_area:
+            form_login:
+                enable_csrf: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

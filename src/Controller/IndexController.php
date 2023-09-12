@@ -12,6 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
+    /**
+     * @param PictureRepository $pictureRepository
+     * @param UserRepository $userRepository
+     * @param EntityManagerInterface $entityManager
+     * @return Response
+     */
     #[Route(path: '/', name: 'app_index')]
     public function index(PictureRepository $pictureRepository, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {

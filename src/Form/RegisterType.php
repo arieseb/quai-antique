@@ -17,6 +17,10 @@ class RegisterType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('password', PasswordType::class)
+            ->add('passwordConfirm', PasswordType::class, [
+                'required' => true,
+                'mapped' =>false,
+            ])
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
         ;

@@ -23,6 +23,9 @@ class NoonBookingType extends AbstractType
         $this->token = $token;
     }
 
+    /**
+     * @return int|null
+     */
     public function defaultGuests(): ?int
     {
         if ($this->token->getToken() !== null) {
@@ -33,6 +36,9 @@ class NoonBookingType extends AbstractType
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function defaultAllergies(): ?string
     {
         if($this->token->getToken() !== null) {

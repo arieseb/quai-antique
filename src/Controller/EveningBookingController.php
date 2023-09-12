@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use IntlDateFormatter;
 
 class EveningBookingController extends AbstractController
 {
@@ -23,6 +24,13 @@ class EveningBookingController extends AbstractController
         $this->token = $token;
     }
 
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param RestaurantRepository $restaurantRepository
+     * @param BookingDateRepository $bookingDateRepository
+     * @return Response
+     */
     #[Route(path: '/reserver/soir', name: 'app_booking_evening')]
     public function booking(
         Request $request,
@@ -33,6 +41,10 @@ class EveningBookingController extends AbstractController
     {
         $restaurant = $restaurantRepository->findOneBy(['name' => 'Le Quai Antique']);
         $roomAvailable = $restaurant->getMaxGuests();
+        $workingDays = $restaurant->getBusinessDays();
+        $locale = 'fr_FR';
+        $formatter = new IntlDateFormatter($locale, IntlDateFormatter::NONE, IntlDateFormatter::NONE);
+        $formatter->setPattern('EEEE');
 
         if ($this->token->getToken() !== null) {
             $user = $this->token->getToken()->getUser();
@@ -50,6 +62,13 @@ class EveningBookingController extends AbstractController
         if ($bookingDate !== null) {
             $roomAvailable = $restaurant->getMaxGuests() - $bookingDate->getEveningGuests();
             if ($form->isSubmitted() && $form->isValid()) {
+                if (!in_array(ucfirst($formatter->format($booking->getDate())), $workingDays, true)) {
+                    $this->addFlash('error', 'Le restaurant n\'est pas ouvert ce jour là');
+                    return $this->render('booking/evening.html.twig', [
+                        'form' => $form->createView(),
+                        'roomAvailable' => $roomAvailable,
+                    ]);
+                }
                 if (($roomAvailable - $booking->getGuestNumber()) < 0) {
                     $this->addFlash('error', 'Il n\'y a plus suffisamment de place disponible pour réserver pendant ce service');
                     return $this->render('booking/evening.html.twig', [
@@ -71,6 +90,13 @@ class EveningBookingController extends AbstractController
         } else {
             $newBookingDate = new BookingDate();
             if ($form->isSubmitted() && $form->isValid()) {
+                if (!in_array(ucfirst($formatter->format($booking->getDate())), $workingDays, true)) {
+                    $this->addFlash('error', 'Le restaurant n\'est pas ouvert ce jour là');
+                    return $this->render('booking/evening.html.twig', [
+                        'form' => $form->createView(),
+                        'roomAvailable' => $roomAvailable,
+                    ]);
+                }
                 if (($roomAvailable - $booking->getGuestNumber()) < 0) {
                     $this->addFlash('error', 'Il n\'y a plus suffisamment de place disponible pour réserver pendant ce service');
                     return $this->render('booking/evening.html.twig', [

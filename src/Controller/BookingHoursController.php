@@ -11,6 +11,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class BookingHoursController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param RestaurantRepository $restaurantRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse|void
+     */
     #[Route(path: '/noon_booking_hours', name: 'noon_booking_hours')]
     public function noonBookingHours (Request $request, RestaurantRepository $restaurantRepository, SerializerInterface $serializer)
     {
@@ -28,6 +34,12 @@ class BookingHoursController extends AbstractController
         }
     }
 
+    /**
+     * @param Request $request
+     * @param RestaurantRepository $restaurantRepository
+     * @param SerializerInterface $serializer
+     * @return JsonResponse|void
+     */
     #[Route(path: '/evening_booking_hours', name: 'evening_booking_hours')]
     public function eveningBookingHours (Request $request, RestaurantRepository $restaurantRepository, SerializerInterface $serializer)
     {

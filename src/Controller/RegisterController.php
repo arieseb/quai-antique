@@ -16,6 +16,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class RegisterController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserPasswordHasherInterface $passwordHasher
+     * @param ValidatorInterface $validator
+     * @param TokenStorageInterface $storage
+     * @return Response
+     */
     #[Route(path: '/register', name: 'app_register')]
     public function register(
         Request $request,
@@ -32,6 +40,15 @@ class RegisterController extends AbstractController
         $errors = $validator->validate($form);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $form->get('password')->getData();
+            $confirmation = $form->get('passwordConfirm')->getData();
+            if($password !== $confirmation) {
+                $this->addFlash('error', 'Les saisies du mot de passe ne correspondent pas.');
+                return $this->render('security/register.html.twig', [
+                    'form' => $form->createView(),
+                    'errors' => $errors
+                ]);
+            }
             $user->setPassword($passwordHasher->hashPassword($user, $user->getPassword()));
             $entityManager->persist($user);
             $entityManager->flush();

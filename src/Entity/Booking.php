@@ -27,6 +27,9 @@ class Booking
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $noonBookingTime = null;
 
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $eveningBookingTime = null;
+
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $user = null;
@@ -37,14 +40,15 @@ class Booking
     )]
     private ?int $guestNumber = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $eveningBookingTime = null;
-
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     #[ORM\JoinColumn(nullable: false)]
     private ?BookingDate $bookingDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Regex(
+        pattern: '/^([a-zA-Z-,;\'éèêëïàùôçâ ]){1,255}$/',
+        message: 'Ne doit pas contenir de balises HTML !'
+    )]
     private ?string $allergies = null;
 
     public function getId(): ?Uuid

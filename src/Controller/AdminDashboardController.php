@@ -22,6 +22,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminDashboardController extends AbstractController
 {
+    /**
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param RestaurantRepository $restaurantRepository
+     * @return Response
+     */
     #[Route(path: '/admin', name: 'app_dashboard')]
     public function index(
         Request $request,
